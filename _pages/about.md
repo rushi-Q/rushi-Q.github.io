@@ -18,9 +18,14 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 
 I'm a second year PhD student @GeorgiaTech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).  
+
+Currently I'm Student Researcher @Google Deepmind, Moutain View.
+
 Before this, I graduated with a Bachelor's degree from Tsinghua University.
 
-My research interests include LLMs, Modular Learning, and AI Agents.
+I'm working on Agentic Environments, Post-Training, and Harness, with a focus on Machine Learning Engineering Agents in a broad sense.
+
+Feel free to contact me for collaboration & opportunities.
 
 
 # 📝 Publications and Preprints
