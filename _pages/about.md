@@ -19,7 +19,7 @@ redirect_from:
 
 I'm a second year PhD student @Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).  
 
-Currently I'm a Student Researcher @Google Deepmind, Moutain View.
+Currently I'm a Student Researcher @Google DeepMind, Moutain View.
 
 Before this, I graduated with a Bachelor's degree from Tsinghua University.
 
