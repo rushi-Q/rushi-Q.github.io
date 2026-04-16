@@ -25,7 +25,7 @@ Before this, I graduated with a Bachelor's degree from Tsinghua University.
 
 I'm working on Agentic Environments, Post-Training, and Harness, with a focus on Machine Learning Engineering Agents in a broad sense.
 
-Feel free to contact me for collaboration & opportunities.
+Feel free to contact me for Collaboration & Opportunities.
 
 
 # 📝 Publications and Preprints
