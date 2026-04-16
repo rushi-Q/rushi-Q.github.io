@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I'm a second year PhD student @GeorgiaTech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).  
+I'm a second year PhD student @Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).  
 
 Currently I'm a Student Researcher @Google Deepmind, Moutain View.
 
