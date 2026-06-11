@@ -125,12 +125,7 @@ html {
     background-color: $parchment;
 }
 
-/* Masthead and footer share the parchment tone */
-.masthead {
-    background-color: $parchment;
-    border-bottom: 1px solid $warm-border;
-}
-
+/* Footer shares the parchment tone */
 .page__footer {
     background-color: #efe7d6;
     border-top: 1px solid $warm-border;
