@@ -17,7 +17,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I'm a second year PhD student @Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).  
+<div class="intro" markdown="1">
+
+I'm a second year PhD student @Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).
 
 Currently I'm a Student Researcher @Google DeepMind, Mountain View.
 
@@ -27,8 +29,10 @@ I'm working on Agentic Environments, Post-Training, and Harness, with a focus on
 
 Feel free to contact me for Collaboration & Opportunities.
 
+</div>
 
-# 📝 Publications and Preprints
+
+# Publications and Preprints
 
 - [MLE-Smith: Scaling MLE Tasks with Automated Multi-Agent Pipeline](https://arxiv.org/abs/2510.07307),  
   Rushi Qiang, Yuchen Zhuang, Anikait Singh, Percy Liang, Chao Zhang, Sherry Yang, Bo Dai.  
@@ -61,12 +65,12 @@ Feel free to contact me for Collaboration & Opportunities.
   **COLM 2025**.
 
 
-# 🏭 Industrial Internship
+# Industrial Internship
 
 - *Feb 2nd, 2026 – present*, **Google DeepMind**, Mountain View.  
 
 
-# 📖 Education
+# Education
 
 - *2024.08 – present*, PhD student in Machine Learning, Georgia Institute of Technology.  
 - *2020.09 – 2024.06*, B.Eng. in Automation, Tsinghua University.

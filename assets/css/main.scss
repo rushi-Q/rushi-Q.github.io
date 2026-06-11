@@ -107,3 +107,123 @@ h1:before, .anchor:before {
     background-color: #00369f;
     font-size: .8em;
 }
+
+/* ==========================================================================
+   Renaissance refinements — parchment, ink, classical serif
+   ========================================================================== */
+
+body {
+    font-size: 1.05em;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* a faint laid-paper warmth behind the content */
+html {
+    background-color: $parchment;
+}
+
+/* Section headings: small-cap display serif with a hairline rule */
+.page__content {
+    h1 {
+        font-family: $display-serif;
+        font-weight: 600;
+        font-size: 1.9em;
+        letter-spacing: 0.04em;
+        color: $sepia;
+        margin-top: 1.8em;
+        padding-bottom: 0.3em;
+        border-bottom: 1px solid $warm-border;
+    }
+
+    h2, h3 {
+        font-family: $display-serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: $sepia;
+    }
+
+    p, li {
+        color: $ink;
+    }
+
+    /* Opening paragraph — Renaissance drop cap */
+    .intro {
+        margin-bottom: 1.5em;
+
+        p:first-of-type::first-letter {
+            float: left;
+            font-family: $display-serif;
+            font-weight: 600;
+            font-size: 3.4em;
+            line-height: 0.78;
+            padding: 0.06em 0.12em 0 0;
+            margin-right: 0.02em;
+            color: $oxblood;
+        }
+    }
+}
+
+/* Links: quiet oxblood with a soft underline on hover */
+a {
+    color: $oxblood;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: $global-transition;
+
+    &:hover {
+        color: mix(#000, $oxblood, 20%);
+        border-bottom-color: rgba($oxblood, 0.45);
+    }
+}
+
+/* Sidebar / author card */
+.sidebar {
+    .author__name {
+        font-family: $display-serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: $ink;
+    }
+
+    .author__bio,
+    .author__urls li,
+    .author__urls a {
+        font-family: $serif;
+        color: $sepia;
+    }
+
+    .author__urls a:hover {
+        color: $oxblood;
+        text-decoration: none;
+        border-bottom: none;
+    }
+}
+
+/* Avatar framed like a small portrait */
+.author__avatar img {
+    border: 1px solid $warm-border !important;
+    box-shadow: 0 2px 10px rgba(60, 45, 30, 0.12);
+}
+
+/* Quieter, warmer rules and quotes */
+hr {
+    border-top: 1px solid $warm-border;
+}
+
+blockquote {
+    color: $sepia;
+    border-left: 0.2em solid $oxblood;
+}
+
+/* Warm text selection */
+::selection {
+    background: rgba($oxblood, 0.18);
+}
+
+/* Paper-box separators in the warm tone */
+.paper-box {
+    border-bottom: 1px solid $warm-border;
+}

@@ -13,15 +13,14 @@ $paragraph-indent           : false; // true, false (default)
 $indent-var                 : 0.5em;
 
 /* system typefaces */
-$serif                      : Georgia, Times, serif;
-$sans-serif                 : "Trebuchet MS", Helvetica, sans-serif;
-// $sans-serif                 : Georgia, serif, sans-serif;
-
-// $sans-serif                 : -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+$serif                      : "EB Garamond", Georgia, Times, serif;
+$display-serif              : "Cormorant Garamond", "EB Garamond", Georgia, serif;
+/* unified to serif for a literary, Renaissance feel */
+$sans-serif                 : $serif;
 $monospace                  : Monaco, Consolas, "Lucida Console", monospace;
 
 /* sans serif typefaces */
-$sans-serif-narrow          : $sans-serif;
+$sans-serif-narrow          : $serif;
 $helvetica                  : Helvetica, "Helvetica Neue", Arial, sans-serif;
 
 /* serif typefaces */
@@ -31,8 +30,8 @@ $bodoni                     : "Bodoni MT", serif;
 $calisto                    : "Calisto MT", serif;
 $garamond                   : Garamond, serif;
 
-$global-font-family         : $sans-serif;
-$header-font-family         : $sans-serif;
+$global-font-family         : $serif;
+$header-font-family         : $display-serif;
 $caption-font-family        : $serif;
 
 /* type scale */
@@ -56,18 +55,25 @@ $darker-gray                : mix(#000, $gray, 60%);
 $light-gray                 : mix(#fff, $gray, 50%);
 $lighter-gray               : mix(#fff, $gray, 90%);
 
-$body-color                 : #fff;
-$background-color           : #fff;
-$code-background-color      : #fafafa;
-$code-background-color-dark : $light-gray;
-$text-color                 : $dark-gray;
-$border-color               : $lighter-gray;
+/* Parchment palette — warm paper, ink text, oxblood accents */
+$parchment                  : #f6f1e7;
+$ink                        : #33302b;
+$sepia                      : #5c5245;
+$oxblood                    : #8a3324;
+$warm-border                : #e3d8c4;
 
-$primary-color              : #7a8288;
+$body-color                 : $parchment;
+$background-color           : $parchment;
+$code-background-color      : #efe7d6;
+$code-background-color-dark : $light-gray;
+$text-color                 : $ink;
+$border-color               : $warm-border;
+
+$primary-color              : $sepia;
 $success-color              : #62c462;
 $warning-color              : #f89406;
 $danger-color               : #ee5f5b;
-$info-color                 : #224b8d;
+$info-color                 : $oxblood;
 // $info-color                 : #52adc8;
 
 /* brands */
