@@ -165,20 +165,9 @@ html {
         color: $ink;
     }
 
-    /* Opening paragraph — Renaissance drop cap */
+    /* Opening paragraph */
     .intro {
         margin-bottom: 1.5em;
-
-        p:first-of-type::first-letter {
-            float: left;
-            font-family: $display-serif;
-            font-weight: 600;
-            font-size: 3.4em;
-            line-height: 0.78;
-            padding: 0.06em 0.12em 0 0;
-            margin-right: 0.02em;
-            color: $oxblood;
-        }
     }
 }
 
