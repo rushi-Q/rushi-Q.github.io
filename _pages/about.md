@@ -19,9 +19,13 @@ redirect_from:
 
 <div class="intro" markdown="1">
 
-I study how models can improve models: building the environments, algorithms, infrastructure, and harnesses through which language models take part in constructing their successors.
+I study how <span class="accent">models can improve models</span>: building the environments, algorithms, infrastructure, and harnesses through which language models take part in constructing their successors.
 
-I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/), and currently a Student Researcher at Google DeepMind in Mountain View, where I work on agentic MLE for Gemini. Before Georgia Tech, I received my B.Eng. in Automation from Tsinghua University as a member of its AGI Pilot Class (TONG Class).
+I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).
+
+Currently, I am a Student Researcher at Google DeepMind in Mountain View, where I work on agentic MLE for Gemini.
+
+Before Georgia Tech, I received my B.Eng. in Automation from Tsinghua University.
 
 I welcome conversations about research, collaboration, and opportunities: reach me at [rqiang6@gatech.edu](mailto:rqiang6@gatech.edu).
 
@@ -36,7 +40,7 @@ My research aims at <em>self-improving AI</em>, organized as a stack in which ev
   <li><span class="research-topic">Data &amp; Environments.</span> Interactive playgrounds where agents run the real experiment loop, and automated pipelines that manufacture verifiable tasks at scale (<a href="https://arxiv.org/abs/2505.07782">MLE-Dojo</a>, <a href="https://arxiv.org/abs/2510.07307">MLE-Smith</a>).</li>
   <li><span class="research-topic">Algorithms.</span> Post-training that stays dense, reliable, and on-policy over long horizons (<a href="https://arxiv.org/abs/2605.12913">Agent DAgger</a>).</li>
   <li><span class="research-topic">Infrastructure.</span> Modular systems that schedule and scale agentic reinforcement learning (<a href="https://github.com/StACx-StandAloneComplex/stacx">STACX</a>).</li>
-  <li><span class="research-topic">Harnesses.</span> Hierarchical orchestration that sustains long-horizon optimization and research, keeping exploration coherent as contexts grow.</li>
+  <li><span class="research-topic">Harnesses.</span> Hierarchical orchestration that sustains long-horizon optimization and research (<a href="/">Matryoshka Agent</a>).</li>
 </ul>
 
 The long-term goal is <em>LLM for LLM</em>: language models building the systems that build language models, grounded in verifiable, real-world engineering.
@@ -101,7 +105,7 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
 <ul class="cv-list">
   <li>
     <span class="cv-body"><strong>Google DeepMind</strong>, Mountain View
-      <span class="cv-detail">Student Researcher &middot; RL environments for agentic MLE and code optimization</span>
+      <span class="cv-detail">Student Researcher &middot; agentic MLE for Gemini</span>
     </span>
     <span class="cv-date">Feb 2026 &ndash; present</span>
   </li>
@@ -119,7 +123,7 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
   </li>
   <li>
     <span class="cv-body"><strong>Tsinghua University</strong>, Beijing
-      <span class="cv-detail">B.Eng. in Automation &middot; AGI Pilot Class (TONG Class)</span>
+      <span class="cv-detail">B.Eng. in Automation</span>
     </span>
     <span class="cv-date">Sep 2020 &ndash; Jun 2024</span>
   </li>

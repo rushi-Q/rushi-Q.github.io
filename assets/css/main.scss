@@ -175,20 +175,26 @@ a {
     }
 }
 
-/* ---- Opening biography ---- */
+/* ---- Opening biography: the credo is the page's epigraph ---- */
 .intro {
     margin-bottom: 1.6em;
 
     p {
-        font-size: 1.05em;
+        font-size: 1.02em;
     }
 
     p:first-child {
         font-family: $display-serif;
+        font-style: italic;
         font-weight: 500;
-        font-size: 1.16em;
-        line-height: 1.6;
+        font-size: 1.34em;
+        line-height: 1.5;
         color: $ink;
+        margin-bottom: 0.9em;
+    }
+
+    .accent {
+        color: $oxblood;
     }
 }
 
@@ -384,4 +390,172 @@ blockquote {
     color: $parchment;
     background-color: $oxblood;
     font-size: .8em;
+}
+
+/* ==========================================================================
+   Light / dark theme
+   ========================================================================== */
+
+html {
+    color-scheme: light;
+}
+
+html, body, .page__footer, #theme-toggle {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ---- Toggle button: a quiet coin in the corner ---- */
+#theme-toggle {
+    position: fixed;
+    top: 1.1em;
+    right: 1.2em;
+    z-index: 200;
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid $warm-border;
+    background: rgba(#fff, 0.65);
+    color: $sepia;
+    font-size: 0.95em;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+
+    .fa-sun { display: none; }
+
+    &:hover {
+        color: $oxblood;
+        border-color: rgba($oxblood, 0.45);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $oxblood;
+        outline-offset: 2px;
+    }
+}
+
+/* ---- Night: warm charcoal, unbleached text, dusty-rose accent ---- */
+$night-bg     : #1e1b17;
+$night-text   : #ece7dd;
+$night-muted  : #a69e91;
+$night-border : #3a352d;
+$night-accent : #c78a99;
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    background-color: $night-bg;
+
+    body {
+        background-color: $night-bg;
+        color: $night-text;
+    }
+
+    a {
+        color: $night-accent;
+
+        &:hover { color: mix(#fff, $night-accent, 25%); }
+    }
+
+    .page__content {
+        a:not(.btn) {
+            border-bottom-color: rgba($night-accent, 0.3);
+
+            &:hover { border-bottom-color: rgba($night-accent, 0.7); }
+        }
+
+        h1 {
+            color: $night-text;
+            border-bottom-color: $night-border;
+
+            &::after { background: $night-accent; }
+        }
+
+        h2, h3, p, li, strong { color: $night-text; }
+    }
+
+    .intro .accent { color: $night-accent; }
+    .intro p:first-child { color: $night-text; }
+
+    .research-list {
+        li::before { background: rgba($night-accent, 0.6); }
+        .research-topic { color: $night-text; }
+    }
+
+    .pub-list {
+        .pub-venue { color: $night-accent; }
+
+        .pub-title a {
+            color: $night-text;
+
+            &:hover { color: $night-accent; }
+        }
+
+        .pub-authors {
+            color: $night-muted;
+
+            .me { color: $night-text; }
+        }
+    }
+
+    .pub-note { color: $night-muted; }
+
+    .cv-list {
+        .cv-detail, .cv-date { color: $night-muted; }
+    }
+
+    .sidebar {
+        .author__name { color: $night-text; }
+
+        .author__bio,
+        .author__urls li,
+        .author__urls a { color: $night-muted; }
+
+        .author__urls a:hover { color: $night-accent; }
+    }
+
+    .author__avatar img {
+        border-color: rgba(#fff, 0.12) !important;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+    }
+
+    .page__footer {
+        background-color: #24201b;
+        border-top-color: $night-border;
+        color: $night-muted;
+
+        .fas, .fab, .far, .fal { color: $night-muted; }
+    }
+
+    hr { border-top-color: $night-border; }
+
+    blockquote {
+        color: $night-muted;
+        border-left-color: $night-accent;
+    }
+
+    ::selection { background: rgba($night-accent, 0.3); }
+
+    #theme-toggle {
+        border-color: $night-border;
+        background: rgba(#000, 0.3);
+        color: $night-muted;
+
+        .fa-moon { display: none; }
+        .fa-sun { display: inline-block; }
+
+        &:hover {
+            color: $night-accent;
+            border-color: rgba($night-accent, 0.5);
+        }
+    }
 }
