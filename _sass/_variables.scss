@@ -13,9 +13,9 @@ $paragraph-indent           : false; // true, false (default)
 $indent-var                 : 0.5em;
 
 /* system typefaces */
-$serif                      : "EB Garamond", Georgia, Times, serif;
-$display-serif              : "Cormorant Garamond", "EB Garamond", Georgia, serif;
-/* unified to serif for a literary, Renaissance feel */
+$serif                      : "Source Serif 4", Georgia, Times, serif;
+$display-serif              : "Fraunces", "Source Serif 4", Georgia, serif;
+/* unified to serif for a quiet, editorial feel */
 $sans-serif                 : $serif;
 $monospace                  : Monaco, Consolas, "Lucida Console", monospace;
 
@@ -55,16 +55,16 @@ $darker-gray                : mix(#000, $gray, 60%);
 $light-gray                 : mix(#fff, $gray, 50%);
 $lighter-gray               : mix(#fff, $gray, 90%);
 
-/* Parchment palette — warm paper, ink text, oxblood accents */
-$parchment                  : #f7f3ea;
-$ink                        : #2d2a24;
-$sepia                      : #5f5548;
-$oxblood                    : #8a3324;
-$warm-border                : #e6dcc9;
+/* Ivory palette — warm off-white paper, soft ink, a single bordeaux accent */
+$parchment                  : #faf8f4;
+$ink                        : #26221c;
+$sepia                      : #6f6a60;
+$oxblood                    : #6e2639;
+$warm-border                : #e9e4da;
 
 $body-color                 : $parchment;
 $background-color           : $parchment;
-$code-background-color      : #efe7d6;
+$code-background-color      : #f0ece3;
 $code-background-color-dark : $light-gray;
 $text-color                 : $ink;
 $border-color               : $warm-border;

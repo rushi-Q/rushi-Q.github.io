@@ -94,10 +94,10 @@ h1:before, .anchor:before {
 }
 
 /* ==========================================================================
-   Parchment & ink — a quiet, classical reading page
+   Ivory & ink — a quiet, editorial reading page
    ==========================================================================
-   Type:   Cormorant Garamond (display) over EB Garamond (text)
-   Color:  warm paper, soft ink, a single oxblood accent
+   Type:   Fraunces (display) over Source Serif 4 (text)
+   Color:  warm off-white paper, soft ink, a single bordeaux accent
    ========================================================================== */
 
 html {
@@ -105,8 +105,8 @@ html {
 }
 
 body {
-    font-size: 1.06em;
-    line-height: 1.72;
+    font-size: 1.02em;
+    line-height: 1.7;
     font-kerning: normal;
     font-feature-settings: "liga", "kern";
     -webkit-font-smoothing: antialiased;
@@ -138,8 +138,8 @@ a {
     h1 {
         font-family: $display-serif;
         font-weight: 600;
-        font-size: 1.7em;
-        letter-spacing: 0.045em;
+        font-size: 1.5em;
+        letter-spacing: 0.01em;
         color: $ink;
         margin-top: 1.9em;
         margin-bottom: 0.7em;
@@ -185,34 +185,10 @@ a {
 
     p:first-child {
         font-family: $display-serif;
-        font-size: 1.22em;
+        font-weight: 500;
+        font-size: 1.16em;
         line-height: 1.6;
         color: $ink;
-    }
-}
-
-/* ---- News: date channel + entry ---- */
-.news-list {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-
-    li {
-        display: flex;
-        align-items: baseline;
-        gap: 1.1em;
-        margin-bottom: 0.55em;
-        padding-left: 0;
-    }
-
-    .news-date {
-        flex: 0 0 5.4em;
-        font-size: 0.78em;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: $sepia;
-        white-space: nowrap;
     }
 }
 
@@ -272,8 +248,8 @@ a {
         display: block;
         font-family: $display-serif;
         font-weight: 600;
-        font-size: 1.13em;
-        line-height: 1.45;
+        font-size: 1.05em;
+        line-height: 1.5;
 
         a {
             color: $ink;
@@ -342,9 +318,9 @@ a {
 .sidebar {
     .author__name {
         font-family: $display-serif;
-        font-weight: 700;
-        font-size: 1.55em;
-        letter-spacing: 0.02em;
+        font-weight: 600;
+        font-size: 1.5em;
+        letter-spacing: 0.01em;
         color: $ink;
         margin-top: 0.5em;
         margin-bottom: 0.15em;
@@ -375,7 +351,7 @@ a {
 
 /* ---- Footer shares the paper tone ---- */
 .page__footer {
-    background-color: #efe8d8;
+    background-color: #f2efe8;
     border-top: 1px solid $warm-border;
     color: $sepia;
 

@@ -21,22 +21,11 @@ redirect_from:
 
 I study how models can improve models: building the environments, algorithms, infrastructure, and harnesses through which language models take part in constructing their successors.
 
-I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/), and currently a Student Researcher at Google DeepMind in Mountain View, where I work on scaling RL environments for agentic machine-learning engineering and code optimization. Before Georgia Tech, I received my B.Eng. in Automation from Tsinghua University as a member of its AGI Pilot Class (TONG Class).
+I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/), and currently a Student Researcher at Google DeepMind in Mountain View, where I work on agentic MLE for Gemini. Before Georgia Tech, I received my B.Eng. in Automation from Tsinghua University as a member of its AGI Pilot Class (TONG Class).
 
 I welcome conversations about research, collaboration, and opportunities: reach me at [rqiang6@gatech.edu](mailto:rqiang6@gatech.edu).
 
 </div>
-
-
-# News
-
-<ul class="news-list">
-  <li><span class="news-date">Feb 2026</span><span>Joined <strong>Google DeepMind</strong> (Mountain View) as a Student Researcher.</span></li>
-  <li><span class="news-date">Jan 2026</span><span><em>MLE-Smith</em> is accepted at <strong>ICLR 2026</strong>.</span></li>
-  <li><span class="news-date">Sep 2025</span><span><em>MLE-Dojo</em> is accepted at <strong>NeurIPS 2025</strong> (Datasets &amp; Benchmarks) and <em>Matryoshka Pilot</em> at <strong>NeurIPS 2025</strong>.</span></li>
-  <li><span class="news-date">Jul 2025</span><span>Our work on attention-chain uncertainty quantification is accepted at <strong>COLM 2025</strong>.</span></li>
-  <li><span class="news-date">Aug 2024</span><span>Started my Ph.D. in Machine Learning at <strong>Georgia Tech</strong>.</span></li>
-</ul>
 
 
 # Research
@@ -53,7 +42,7 @@ My research aims at <em>self-improving AI</em>, organized as a stack in which ev
 The long-term goal is <em>LLM for LLM</em>: language models building the systems that build language models, grounded in verifiable, real-world engineering.
 
 
-# Publications
+# Publications &amp; Preprints
 
 <ul class="pub-list">
   <li class="pub">
@@ -86,12 +75,6 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
     <span class="pub-title"><a href="https://arxiv.org/abs/2403.09113">AutoLoRA: Automatically Tuning Matrix Ranks in Low-Rank Adaptation Based on Meta Learning</a></span>
     <span class="pub-authors">Ruiyi Zhang<sup>*</sup>, <span class="me">Rushi Qiang</span><sup>*</sup>, Sai Ashish Somayajula, Pengtao Xie</span>
   </li>
-</ul>
-
-
-# Preprints
-
-<ul class="pub-list">
   <li class="pub">
     <span class="pub-venue">arXiv &middot; 2026</span>
     <span class="pub-title"><a href="https://arxiv.org/abs/2605.12913">Revisiting DAgger in the Era of LLM-Agents</a></span>
@@ -113,6 +96,7 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
 
 
 # Experience
+
 
 <ul class="cv-list">
   <li>
@@ -138,24 +122,6 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
       <span class="cv-detail">B.Eng. in Automation &middot; AGI Pilot Class (TONG Class)</span>
     </span>
     <span class="cv-date">Sep 2020 &ndash; Jun 2024</span>
-  </li>
-</ul>
-
-
-# Selected Awards
-
-<ul class="cv-list">
-  <li>
-    <span class="cv-body">Tsinghua Academic Excellence Award <span class="cv-detail">top 5%</span></span>
-    <span class="cv-date">2023</span>
-  </li>
-  <li>
-    <span class="cv-body">Tsinghua Outstanding Public Service Award <span class="cv-detail">8 / 160</span></span>
-    <span class="cv-date">2023</span>
-  </li>
-  <li>
-    <span class="cv-body">AGI Pilot Class (TONG Class) Membership <span class="cv-detail">&le; 30 students per year</span></span>
-    <span class="cv-date">2021 &ndash; 2024</span>
   </li>
 </ul>
 
