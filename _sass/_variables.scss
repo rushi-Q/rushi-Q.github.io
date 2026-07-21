@@ -6,7 +6,7 @@
    Typography
    ========================================================================== */
 
-$doc-font-size              : 14;
+$doc-font-size              : 16;
 
 /* paragraph indention */
 $paragraph-indent           : false; // true, false (default)
@@ -56,11 +56,11 @@ $light-gray                 : mix(#fff, $gray, 50%);
 $lighter-gray               : mix(#fff, $gray, 90%);
 
 /* Parchment palette — warm paper, ink text, oxblood accents */
-$parchment                  : #f6f1e7;
-$ink                        : #33302b;
-$sepia                      : #5c5245;
+$parchment                  : #f7f3ea;
+$ink                        : #2d2a24;
+$sepia                      : #5f5548;
 $oxblood                    : #8a3324;
-$warm-border                : #e3d8c4;
+$warm-border                : #e6dcc9;
 
 $body-color                 : $parchment;
 $background-color           : $parchment;

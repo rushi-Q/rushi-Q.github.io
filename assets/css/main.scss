@@ -46,9 +46,8 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px #efefef solid;
+    border-bottom: 1px solid $warm-border;
     padding: 2em 0 2em 0;
-    
 
     .paper-box-image{
         justify-content: center;
@@ -61,12 +60,12 @@
             object-fit: cover;
         }
     }
-    
+
     .paper-box-text{
         max-width: 100%;
         order: 1;
     }
-    
+
     @include breakpoint($medium) {
         .paper-box-image{
             justify-content: left;
@@ -74,118 +73,281 @@
             max-width: 40%;
             order: 1;
         }
-        
+
         .paper-box-text{
             justify-content: left;
             padding-left: 2em;
             max-width: 60%;
             order: 2;
         }
-
     }
-
-
 }
 
 $scroll_offset : 2em;
-h1:before, .anchor:before { 
-    content: ''; 
-    display: block; 
-    position: relative; 
-    width: 0; 
-    height: $scroll_offset; 
+h1:before, .anchor:before {
+    content: '';
+    display: block;
+    position: relative;
+    width: 0;
+    height: $scroll_offset;
     margin-top: -$scroll_offset;
 }
 
-.badge {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    position: absolute;
-    margin-top: .5em;
-    margin-left: -.5em;
-    color: white;
-    background-color: #00369f;
-    font-size: .8em;
-}
-
 /* ==========================================================================
-   Renaissance refinements — parchment, ink, classical serif
+   Parchment & ink — a quiet, classical reading page
+   ==========================================================================
+   Type:   Cormorant Garamond (display) over EB Garamond (text)
+   Color:  warm paper, soft ink, a single oxblood accent
    ========================================================================== */
 
+html {
+    background-color: $parchment;
+}
+
 body {
-    font-size: 1.05em;
-    line-height: 1.7;
+    font-size: 1.06em;
+    line-height: 1.72;
+    font-kerning: normal;
+    font-feature-settings: "liga", "kern";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
 
-/* a faint laid-paper warmth behind the content */
-html {
-    background-color: $parchment;
-}
+/* ---- Links: quiet oxblood, soft underline ---- */
+a {
+    color: $oxblood;
+    text-decoration: none;
+    transition: $global-transition;
 
-/* Footer shares the parchment tone */
-.page__footer {
-    background-color: #efe7d6;
-    border-top: 1px solid $warm-border;
-    color: $sepia;
-
-    .fas, .fab, .far, .fal {
-        color: $sepia;
+    &:hover {
+        color: mix(#000, $oxblood, 22%);
     }
 }
 
-/* Section headings: small-cap display serif with a hairline rule */
+.page__content a:not(.btn) {
+    border-bottom: 1px solid rgba($oxblood, 0.25);
+
+    &:hover {
+        border-bottom-color: rgba($oxblood, 0.65);
+    }
+}
+
+/* ---- Section headings: display serif over a two-tone rule ---- */
 .page__content {
     h1 {
         font-family: $display-serif;
         font-weight: 600;
-        font-size: 1.9em;
-        letter-spacing: 0.04em;
-        color: $sepia;
-        margin-top: 1.8em;
-        padding-bottom: 0.3em;
+        font-size: 1.7em;
+        letter-spacing: 0.045em;
+        color: $ink;
+        margin-top: 1.9em;
+        margin-bottom: 0.7em;
+        padding-bottom: 0.32em;
         border-bottom: 1px solid $warm-border;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 2.6rem;
+            height: 1px;
+            background: $oxblood;
+        }
     }
 
     h2, h3 {
         font-family: $display-serif;
         font-weight: 600;
         letter-spacing: 0.02em;
-        color: $sepia;
+        color: $ink;
     }
 
     p, li {
         color: $ink;
     }
 
-    /* Opening paragraph */
-    .intro {
+    strong {
+        font-weight: 600;
+        color: $ink;
+    }
+}
+
+/* ---- Opening biography ---- */
+.intro {
+    margin-bottom: 1.6em;
+
+    p {
+        font-size: 1.05em;
+    }
+
+    p:first-child {
+        font-family: $display-serif;
+        font-size: 1.22em;
+        line-height: 1.6;
+        color: $ink;
+    }
+}
+
+/* ---- News: date channel + entry ---- */
+.news-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+        display: flex;
+        align-items: baseline;
+        gap: 1.1em;
+        margin-bottom: 0.55em;
+        padding-left: 0;
+    }
+
+    .news-date {
+        flex: 0 0 5.4em;
+        font-size: 0.78em;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $sepia;
+        white-space: nowrap;
+    }
+}
+
+/* ---- Research directions ---- */
+.research-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+        margin-bottom: 0.75em;
+        padding-left: 1.15em;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 0.38em;
+            height: 0.38em;
+            background: rgba($oxblood, 0.55);
+            transform: rotate(45deg);
+        }
+    }
+
+    .research-topic {
+        font-family: $display-serif;
+        font-weight: 600;
+        font-size: 1.04em;
+        color: $ink;
+    }
+}
+
+/* ---- Publications ---- */
+.pub-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+
+    .pub {
         margin-bottom: 1.5em;
+        padding-left: 0;
+    }
+
+    .pub-venue {
+        display: block;
+        font-size: 0.76em;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $oxblood;
+        margin-bottom: 0.12em;
+    }
+
+    .pub-title {
+        display: block;
+        font-family: $display-serif;
+        font-weight: 600;
+        font-size: 1.13em;
+        line-height: 1.45;
+
+        a {
+            color: $ink;
+            border-bottom: none;
+
+            &:hover {
+                color: $oxblood;
+            }
+        }
+    }
+
+    .pub-authors {
+        display: block;
+        font-size: 0.95em;
+        color: $sepia;
+        line-height: 1.55;
+
+        .me {
+            font-weight: 600;
+            color: $ink;
+        }
     }
 }
 
-/* Links: quiet oxblood with a soft underline on hover */
-a {
-    color: $oxblood;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: $global-transition;
+.pub-note {
+    font-size: 0.85em;
+    font-style: italic;
+    color: $sepia;
+}
 
-    &:hover {
-        color: mix(#000, $oxblood, 20%);
-        border-bottom-color: rgba($oxblood, 0.45);
+/* ---- Curriculum rows (education / experience / awards) ---- */
+.cv-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1.5em;
+        margin-bottom: 0.7em;
+        padding-left: 0;
+    }
+
+    .cv-body {
+        flex: 1 1 auto;
+    }
+
+    .cv-detail {
+        display: block;
+        font-size: 0.92em;
+        color: $sepia;
+    }
+
+    .cv-date {
+        flex: 0 0 auto;
+        font-style: italic;
+        font-size: 0.9em;
+        color: $sepia;
+        white-space: nowrap;
     }
 }
 
-/* Sidebar / author card */
+/* ---- Sidebar: a small portrait card ---- */
 .sidebar {
     .author__name {
         font-family: $display-serif;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.55em;
         letter-spacing: 0.02em;
         color: $ink;
+        margin-top: 0.5em;
+        margin-bottom: 0.15em;
     }
 
     .author__bio,
@@ -195,6 +357,10 @@ a {
         color: $sepia;
     }
 
+    .author__bio {
+        font-style: italic;
+    }
+
     .author__urls a:hover {
         color: $oxblood;
         text-decoration: none;
@@ -202,13 +368,23 @@ a {
     }
 }
 
-/* Avatar framed like a small portrait */
 .author__avatar img {
-    border: 1px solid $warm-border !important;
-    box-shadow: 0 2px 10px rgba(60, 45, 30, 0.12);
+    border: 4px solid rgba(#fff, 0.85) !important;
+    box-shadow: 0 2px 14px rgba(60, 45, 30, 0.16);
 }
 
-/* Quieter, warmer rules and quotes */
+/* ---- Footer shares the paper tone ---- */
+.page__footer {
+    background-color: #efe8d8;
+    border-top: 1px solid $warm-border;
+    color: $sepia;
+
+    .fas, .fab, .far, .fal {
+        color: $sepia;
+    }
+}
+
+/* ---- Small details ---- */
 hr {
     border-top: 1px solid $warm-border;
 }
@@ -216,14 +392,20 @@ hr {
 blockquote {
     color: $sepia;
     border-left: 0.2em solid $oxblood;
+    font-style: italic;
 }
 
-/* Warm text selection */
 ::selection {
-    background: rgba($oxblood, 0.18);
+    background: rgba($oxblood, 0.16);
 }
 
-/* Paper-box separators in the warm tone */
-.paper-box {
-    border-bottom: 1px solid $warm-border;
+.badge {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: absolute;
+    margin-top: .5em;
+    margin-left: -.5em;
+    color: $parchment;
+    background-color: $oxblood;
+    font-size: .8em;
 }

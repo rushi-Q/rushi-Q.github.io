@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Rushi Qiang"
-description              : "PhD student @GeorgiaTech, B.Eng @Tsinghua"
+description              : "Ph.D. student @ Georgia Tech · B.Eng. @ Tsinghua"
 repository               : "https://github.com/rushi-Q/rushi-Q.github.io"
 google_scholar_stats_use_cdn : false
 
@@ -23,7 +23,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Rushi Qiang"
   avatar           : "images/6421744753876_.pic.jpg"
-  bio              : "PhD student"
+  bio              : "Ph.D. student in Machine Learning"
   location         : "Atlanta, Georgia, USA"
   employer         :
   pubmed           : 
@@ -37,7 +37,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : # e.g., "github username"
+  github           : "rushi-Q"
   google_plus      :
   keybase          :
   instagram        :
@@ -136,7 +136,7 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: America/New_York # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
