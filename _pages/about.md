@@ -39,8 +39,8 @@ My research aims at <em>self-improving AI</em>, organized as a stack in which ev
 <ul class="research-list">
   <li><span class="research-topic">Data &amp; Environments.</span> Interactive playgrounds where agents run the real experiment loop, and automated pipelines that manufacture verifiable tasks at scale (<a href="https://arxiv.org/abs/2505.07782">MLE-Dojo</a>, <a href="https://arxiv.org/abs/2510.07307">MLE-Smith</a>).</li>
   <li><span class="research-topic">Algorithms.</span> Post-training that stays dense, reliable, and on-policy over long horizons (<a href="https://arxiv.org/abs/2605.12913">Agent DAgger</a>).</li>
-  <li><span class="research-topic">Infrastructure.</span> Modular systems that schedule and scale agentic reinforcement learning (<a href="https://github.com/StACx-StandAloneComplex/stacx">STACX</a>).</li>
-  <li><span class="research-topic">Harnesses.</span> Hierarchical orchestration that sustains long-horizon optimization and research (<a href="/">Matryoshka Agent</a>).</li>
+  <li><span class="research-topic">Infrastructure.</span> Modular systems that schedule and scale agentic reinforcement learning (<a href="https://github.com/STACX/stacx">STACX</a>).</li>
+  <li><span class="research-topic">Harnesses.</span> Hierarchical orchestration that sustains long-horizon optimization and research (<a href="https://arxiv.org/abs/2607.25090">Matryoshka Agent</a>).</li>
 </ul>
 
 The long-term goal is <em>LLM for LLM</em>: language models building the systems that build language models, grounded in verifiable, real-world engineering.
@@ -81,6 +81,11 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
   </li>
   <li class="pub">
     <span class="pub-venue">arXiv &middot; 2026</span>
+    <span class="pub-title"><a href="https://arxiv.org/abs/2607.25090">Matryoshka Agent: Unfolding Sub-Agents for Long-Horizon Machine Learning Engineering</a></span>
+    <span class="pub-authors"><span class="me">Rushi Qiang</span>, Changhao Li, Haotian Sun, Yuchen Zhuang, Chao Zhang, Bo Dai</span>
+  </li>
+  <li class="pub">
+    <span class="pub-venue">arXiv &middot; 2026</span>
     <span class="pub-title"><a href="https://arxiv.org/abs/2605.12913">Revisiting DAgger in the Era of LLM-Agents</a></span>
     <span class="pub-authors">Changhao Li, <span class="me">Rushi Qiang</span><sup>&dagger;</sup>, Jiawei Huang<sup>&dagger;</sup>, Chenxiao Gao<sup>&dagger;</sup>, Chao Zhang, Niao He, Bo Dai</span>
   </li>
@@ -97,6 +102,20 @@ The long-term goal is <em>LLM for LLM</em>: language models building the systems
 </ul>
 
 <p class="pub-note"><sup>*</sup> equal contribution &nbsp;&middot;&nbsp; <sup>&dagger;</sup> equal second authorship</p>
+
+
+# Software
+
+<ul class="pub-list">
+  <li class="pub">
+    <span class="pub-title"><a href="https://github.com/STACX/stacx">STACX</a></span>
+    <span class="pub-authors">A modular infrastructure for end-to-end agentic reinforcement learning: a sandboxed task-execution engine coupled with a multi-algorithm training engine (GRPO, SFT, DAgger) for scheduling and scaling agent training.</span>
+  </li>
+  <li class="pub">
+    <span class="pub-title"><a href="https://github.com/MLE-Dojo/MLE-Dojo">MLE-Dojo</a></span>
+    <span class="pub-authors">A Gym-style framework for training, evaluating, and improving LLM agents on iterative machine learning engineering workflows, with interactive sandbox environments built on 200+ real Kaggle competitions.</span>
+  </li>
+</ul>
 
 
 # Experience
