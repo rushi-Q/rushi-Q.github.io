@@ -19,7 +19,7 @@ redirect_from:
 
 <div class="intro" markdown="1">
 
-I study how <span class="accent">models can improve models</span>: building the environments, algorithms, infrastructure, and harnesses through which language models take part in constructing their successors.
+I'm interested in <span class="accent">frontier models taking part in constructing their successors</span>, through environments, algorithms, infrastructure, and harnesses. I view it as a horizontal endeavor, one I hope to realize through the right way of scaling.
 
 I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).
 
@@ -44,6 +44,8 @@ My research aims at <em>self-improving AI</em>, organized as a stack in which ev
 </ul>
 
 The long-term goal is <em>LLM for LLM</em>: language models building the systems that build language models, grounded in verifiable, real-world engineering.
+
+I strive for research and projects that are scalable and have real impact on frontier models. I contribute to frontier models such as [Gemini](https://deepmind.google/models/gemini/flash/); MLE-Dojo and MLE-Smith are widely used in the development of MLE/RSI agents and systems, and have proven scalable (e.g., [OpenRSI](https://github.com/FrontisAI/OpenRSI)).
 
 
 # Publications &amp; Preprints
