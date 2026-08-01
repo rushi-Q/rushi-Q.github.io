@@ -19,7 +19,7 @@ redirect_from:
 
 <div class="intro" markdown="1">
 
-I'm interested in <span class="accent">frontier models taking part in constructing their successors</span>, through environments, algorithms, infrastructure, and harnesses. I view it as a horizontal endeavor, one I hope to realize through the right way of scaling.
+I'm interested in how <span class="accent">frontier models take part in constructing their successors</span>, through environments, algorithms, infrastructure, and harnesses. I view it as a horizontal endeavor, one I hope to realize through the right way of scaling.
 
 I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).
 
@@ -43,9 +43,13 @@ My research aims at <em>self-improving AI</em>, organized as a stack in which ev
   <li><span class="research-topic">Harnesses.</span> Hierarchical orchestration that sustains long-horizon optimization and research (<a href="https://arxiv.org/abs/2607.25090">Matryoshka Agent</a>).</li>
 </ul>
 
-The long-term goal is <em>LLM for LLM</em>: language models building the systems that build language models, grounded in verifiable, real-world engineering.
+I wish to find the right way of scaling for <em>Recursive Self-Improvement</em>.
 
-I strive for research and projects that are scalable and have real impact on frontier models. I contribute to frontier models such as [Gemini](https://deepmind.google/models/gemini/flash/); MLE-Dojo and MLE-Smith are widely used in the development of MLE/RSI agents and systems, and have proven scalable (e.g., [OpenRSI](https://github.com/FrontisAI/OpenRSI)).
+I strive for research and projects that are scalable and have real impact on frontier models.
+
+I contribute to frontier models such as [Gemini](https://deepmind.google/models/gemini/flash/).
+
+MLE-Dojo and MLE-Smith have been widely adopted for building MLE/RSI agents and systems, and have proven scalable (e.g., [OpenRSI](https://github.com/FrontisAI/OpenRSI)).
 
 
 # Publications &amp; Preprints
