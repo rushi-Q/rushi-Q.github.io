@@ -30,9 +30,7 @@
       pole: 'rgba(110, 38, 57, 0.55)',
       marker: '#6e2639',
       halo: 'rgba(110, 38, 57, 0.15)',
-      refDot: 'rgba(33, 30, 25, 0.8)',
-      refLabel: 'rgba(60, 51, 40, 0.85)',
-      refHalo: 'rgba(250, 249, 245, 0.78)'
+      refDot: 'rgba(33, 30, 25, 0.8)'
     },
     night: {
       orb: [
@@ -52,9 +50,7 @@
       pole: 'rgba(199, 138, 153, 0.6)',
       marker: '#c78a99',
       halo: 'rgba(199, 138, 153, 0.2)',
-      refDot: 'rgba(236, 231, 221, 0.85)',
-      refLabel: 'rgba(226, 218, 202, 0.85)',
-      refHalo: 'rgba(30, 27, 23, 0.75)'
+      refDot: 'rgba(236, 231, 221, 0.85)'
     }
   };
 
@@ -164,6 +160,7 @@
 
   var P = [0, 0, 0];
   var screenMarkers = [];
+  var screenRefs = [];
 
   function strokeCircleOnSphere(c, R, latDeg, lonDeg, isParallel) {
     /* one parallel (fixed lat) or meridian (fixed lon), backface-culled */
@@ -279,10 +276,8 @@
     }
     ctx.stroke();
 
-    /* reference cities: small ink squares with italic gazetteer labels,
-       fading in away from the limb, label flipped inward near the edge */
-    ctx.font = 'italic 8.5px "Source Serif 4", Georgia, serif';
-    ctx.textBaseline = 'middle';
+    /* reference cities: small ink squares, named only on hover */
+    screenRefs.length = 0;
     for (var rc = 0; rc < REF.length; rc++) {
       project(REF[rc].x, REF[rc].y, REF[rc].z, P);
       if (P[2] <= 0.12) continue;
@@ -291,16 +286,9 @@
       var ry = c + P[1] * R;
       ctx.globalAlpha = fade;
       ctx.fillStyle = pal.refDot;
-      ctx.fillRect(rx - 1.3, ry - 1.3, 2.6, 2.6);
-      var onRight = rx > c;
-      ctx.textAlign = onRight ? 'right' : 'left';
-      var lx = onRight ? rx - 5 : rx + 5;
-      ctx.lineWidth = 2.4;
-      ctx.strokeStyle = pal.refHalo;
-      ctx.strokeText(REF[rc].name, lx, ry - 0.5);
-      ctx.fillStyle = pal.refLabel;
-      ctx.fillText(REF[rc].name, lx, ry - 0.5);
+      ctx.fillRect(rx - 1.4, ry - 1.4, 2.8, 2.8);
       ctx.globalAlpha = 1;
+      screenRefs.push({ x: rx, y: ry, label: REF[rc].name });
     }
 
     /* visitor markers: bordeaux diamonds sized by count */
@@ -385,8 +373,16 @@
       var d = (sm.x - px) * (sm.x - px) + (sm.y - py) * (sm.y - py);
       if (d < bd && d < (sm.r + 6) * (sm.r + 6)) { bd = d; best = sm; }
     }
+    if (!best) {
+      var rbd = 64;
+      for (var j = 0; j < screenRefs.length; j++) {
+        var sr = screenRefs[j];
+        var rd = (sr.x - px) * (sr.x - px) + (sr.y - py) * (sr.y - py);
+        if (rd < rbd) { rbd = rd; best = sr; }
+      }
+    }
     if (best) {
-      tooltip.textContent = best.label + ' · ' + best.count;
+      tooltip.textContent = best.count ? best.label + ' · ' + best.count : best.label;
       tooltip.style.display = 'block';
       tooltip.style.left = Math.round(best.x) + 'px';
       tooltip.style.top = Math.round(best.y - 12) + 'px';
