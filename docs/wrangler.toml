@@ -1,0 +1,8 @@
+name = "visits"
+main = "visitor-globe-worker.js"
+compatibility_date = "2026-08-01"
+
+# After `npx wrangler kv namespace create VISITS`, paste the printed id below.
+[[kv_namespaces]]
+binding = "VISITS"
+id = "PASTE_NAMESPACE_ID_HERE"

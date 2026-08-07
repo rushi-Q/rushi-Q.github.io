@@ -8,7 +8,26 @@ on Cloudflare Workers (free tier: 100k requests/day, far more than enough).
 It stores **only aggregated city-level counts** — no IP addresses, no cookies
 (the site uses `sessionStorage` so one browsing session counts once).
 
-## Steps (all in the Cloudflare dashboard, no CLI)
+## Option A — wrangler CLI (fastest if you have Node)
+
+A ready wrangler project lives in `docs/` (`wrangler.toml` + the worker). On a
+machine with a browser (e.g. your laptop):
+
+```bash
+cd docs
+npx wrangler login                        # opens the browser once to authorize
+npx wrangler kv namespace create VISITS   # prints an id like id = "34d4..."
+# paste that id into wrangler.toml (replacing PASTE_NAMESPACE_ID_HERE)
+npx wrangler deploy                       # prints the worker URL
+```
+
+On a headless machine, skip `wrangler login`: create an API token instead
+(dash.cloudflare.com → My Profile → API Tokens → "Edit Cloudflare Workers"
+template), then `export CLOUDFLARE_API_TOKEN=...` before the same commands.
+
+Finally put the printed URL into `_config.yml` as `visitor_stats_url` and push.
+
+## Option B — Cloudflare dashboard (no CLI)
 
 1. Create a free account at https://dash.cloudflare.com/sign-up if you don't have
    one.
