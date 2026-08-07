@@ -9,6 +9,7 @@
 title                    : "Rushi Qiang"
 description              : "Ph.D. student @ Georgia Tech · B.Eng. @ Tsinghua"
 repository               : "https://github.com/rushi-Q/rushi-Q.github.io"
+visitor_stats_url        : # e.g., "https://visits.<your-subdomain>.workers.dev" (see docs/visitor-globe-setup.md)
 google_scholar_stats_use_cdn : false
 
 # google analytics
