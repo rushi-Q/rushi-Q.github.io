@@ -285,8 +285,12 @@
       var rx = c + P[0] * R;
       var ry = c + P[1] * R;
       ctx.globalAlpha = fade;
+      ctx.save();
+      ctx.translate(rx, ry);
+      ctx.rotate(Math.PI / 4);
       ctx.fillStyle = pal.refDot;
-      ctx.fillRect(rx - 1.4, ry - 1.4, 2.8, 2.8);
+      ctx.fillRect(-1.5, -1.5, 3, 3);
+      ctx.restore();
       ctx.globalAlpha = 1;
       screenRefs.push({ x: rx, y: ry, label: REF[rc].name });
     }
