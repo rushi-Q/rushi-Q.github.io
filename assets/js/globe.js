@@ -62,8 +62,21 @@
   var REF = [
     { name: 'Mountain View', lat: 37.39, lon: -122.08 },
     { name: 'Atlanta', lat: 33.75, lon: -84.39 },
-    { name: 'Beijing', lat: 39.9, lon: 116.4 },
+    { name: 'New York', lat: 40.71, lon: -74.01 },
+    { name: 'Mexico City', lat: 19.43, lon: -99.13 },
+    { name: 'São Paulo', lat: -23.55, lon: -46.63 },
+    { name: 'Buenos Aires', lat: -34.6, lon: -58.38 },
+    { name: 'Honolulu', lat: 21.31, lon: -157.86 },
     { name: 'London', lat: 51.51, lon: -0.13 },
+    { name: 'Rome', lat: 41.9, lon: 12.5 },
+    { name: 'Moscow', lat: 55.76, lon: 37.62 },
+    { name: 'Cairo', lat: 30.04, lon: 31.24 },
+    { name: 'Cape Town', lat: -33.92, lon: 18.42 },
+    { name: 'Dubai', lat: 25.2, lon: 55.27 },
+    { name: 'Mumbai', lat: 19.08, lon: 72.88 },
+    { name: 'Singapore', lat: 1.35, lon: 103.82 },
+    { name: 'Beijing', lat: 39.9, lon: 116.4 },
+    { name: 'Shanghai', lat: 31.23, lon: 121.47 },
     { name: 'Tokyo', lat: 35.68, lon: 139.69 },
     { name: 'Sydney', lat: -33.87, lon: 151.21 }
   ];
