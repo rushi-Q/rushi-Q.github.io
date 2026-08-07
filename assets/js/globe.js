@@ -29,7 +29,10 @@
       coast: 'rgba(60, 51, 40, 0.8)',
       pole: 'rgba(110, 38, 57, 0.55)',
       marker: '#6e2639',
-      halo: 'rgba(110, 38, 57, 0.15)'
+      halo: 'rgba(110, 38, 57, 0.15)',
+      refDot: 'rgba(33, 30, 25, 0.8)',
+      refLabel: 'rgba(60, 51, 40, 0.85)',
+      refHalo: 'rgba(250, 249, 245, 0.78)'
     },
     night: {
       orb: [
@@ -48,9 +51,31 @@
       coast: 'rgba(233, 226, 212, 0.82)',
       pole: 'rgba(199, 138, 153, 0.6)',
       marker: '#c78a99',
-      halo: 'rgba(199, 138, 153, 0.2)'
+      halo: 'rgba(199, 138, 153, 0.2)',
+      refDot: 'rgba(236, 231, 221, 0.85)',
+      refLabel: 'rgba(226, 218, 202, 0.85)',
+      refHalo: 'rgba(30, 27, 23, 0.75)'
     }
   };
+
+  /* reference cities: quiet gazetteer marks that make the globe readable */
+  var REF = [
+    { name: 'Mountain View', lat: 37.39, lon: -122.08 },
+    { name: 'Atlanta', lat: 33.75, lon: -84.39 },
+    { name: 'Beijing', lat: 39.9, lon: 116.4 },
+    { name: 'London', lat: 51.51, lon: -0.13 },
+    { name: 'Tokyo', lat: 35.68, lon: 139.69 },
+    { name: 'Sydney', lat: -33.87, lon: 151.21 }
+  ];
+  (function () {
+    for (var i = 0; i < REF.length; i++) {
+      var la = REF[i].lat * Math.PI / 180;
+      var lo = REF[i].lon * Math.PI / 180;
+      REF[i].x = Math.cos(la) * Math.cos(lo);
+      REF[i].y = Math.cos(la) * Math.sin(lo);
+      REF[i].z = Math.sin(la);
+    }
+  })();
 
   function palette() {
     return document.documentElement.getAttribute('data-theme') === 'dark'
@@ -240,6 +265,30 @@
       ctx.lineTo(c + Math.cos(ang) * t1, c + Math.sin(ang) * t1);
     }
     ctx.stroke();
+
+    /* reference cities: small ink squares with italic gazetteer labels,
+       fading in away from the limb, label flipped inward near the edge */
+    ctx.font = 'italic 8.5px "Source Serif 4", Georgia, serif';
+    ctx.textBaseline = 'middle';
+    for (var rc = 0; rc < REF.length; rc++) {
+      project(REF[rc].x, REF[rc].y, REF[rc].z, P);
+      if (P[2] <= 0.12) continue;
+      var fade = Math.min(1, (P[2] - 0.12) / 0.22);
+      var rx = c + P[0] * R;
+      var ry = c + P[1] * R;
+      ctx.globalAlpha = fade;
+      ctx.fillStyle = pal.refDot;
+      ctx.fillRect(rx - 1.3, ry - 1.3, 2.6, 2.6);
+      var onRight = rx > c;
+      ctx.textAlign = onRight ? 'right' : 'left';
+      var lx = onRight ? rx - 5 : rx + 5;
+      ctx.lineWidth = 2.4;
+      ctx.strokeStyle = pal.refHalo;
+      ctx.strokeText(REF[rc].name, lx, ry - 0.5);
+      ctx.fillStyle = pal.refLabel;
+      ctx.fillText(REF[rc].name, lx, ry - 0.5);
+      ctx.globalAlpha = 1;
+    }
 
     /* visitor markers: bordeaux diamonds sized by count */
     screenMarkers.length = 0;
