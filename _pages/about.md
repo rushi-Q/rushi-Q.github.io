@@ -23,7 +23,7 @@ I'm interested in how <span class="accent">frontier models take part in construc
 
 I am a second-year Ph.D. student in Machine Learning at Georgia Tech, co-advised by [Bo Dai](https://bo-dai.github.io/) and [Chao Zhang](http://chaozhang.org/).
 
-Currently, I am a Student Researcher at Google DeepMind in Mountain View, where I work on agentic MLE for Gemini.
+Currently, I am a Student Researcher at Google DeepMind in Mountain View, where I work on agentic MLE for Gemini. I contribute to the Gemini 3.5 and 3.6 Flash models.
 
 Before Georgia Tech, I received my B.Eng. in Automation from Tsinghua University.
 
@@ -47,7 +47,7 @@ I wish to find the right way of scaling for <em>Recursive Self-Improvement</em>.
 
 I strive for research and projects that are scalable and have real impact on frontier models.
 
-I contribute to frontier models such as [Gemini](https://deepmind.google/models/gemini/flash/).
+I contribute to frontier models such as Gemini ([3.5 Flash](https://deepmind.google/models/model-cards/gemini-3-5-flash/), [3.6 Flash](https://deepmind.google/models/model-cards/gemini-3-6-flash/)).
 
 MLE-Dojo and MLE-Smith have been widely adopted for building MLE/RSI agents and systems, and have proven scalable (e.g., [OpenRSI](https://github.com/FrontisAI/OpenRSI)).
 
