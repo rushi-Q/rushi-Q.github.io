@@ -94,12 +94,16 @@
 
   var canvas = document.createElement('canvas');
   var caption = document.createElement('div');
+  var panel = document.createElement('div');
   var tooltip = document.createElement('div');
   caption.className = 'visitor-globe__caption';
+  panel.className = 'visitor-globe__panel';
+  panel.hidden = true;
   tooltip.className = 'visitor-globe__tooltip';
   tooltip.style.display = 'none';
   mount.appendChild(canvas);
   mount.appendChild(caption);
+  mount.appendChild(panel);
   mount.appendChild(tooltip);
 
   var ctx = canvas.getContext('2d');
@@ -145,6 +149,8 @@
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var AUTO = reduced ? 0 : 0.0016;
   var needsRender = true;
+  var fly = null;          /* {spin, tilt} while easing toward a chosen place */
+  var focusKey = null;     /* label of the marker the list is pointing at */
 
   function project(x, y, z, out) {
     var cs = Math.cos(spin), ss = Math.sin(spin);
@@ -312,16 +318,35 @@
       ctx.fillStyle = pal.marker;
       ctx.fillRect(-s / 2, -s / 2, s, s);
       ctx.restore();
+      /* the place picked in the list wears a surveyor's ring */
+      if (focusKey && mk.label === focusKey) {
+        ctx.beginPath();
+        ctx.arc(mx, my, s + 4.5, 0, 2 * Math.PI);
+        ctx.lineWidth = 1.1;
+        ctx.strokeStyle = pal.marker;
+        ctx.stroke();
+      }
       screenMarkers.push({ x: mx, y: my, r: Math.max(s, 5), label: mk.label, count: mk.count });
     }
   }
 
   function tick() {
-    if (!dragging) {
-      spin += AUTO + vSpin;
+    if (fly) {
+      /* ease onto the chosen place, then hand the view back */
+      spin += (fly.spin - spin) * 0.14;
+      tilt += (fly.tilt - tilt) * 0.14;
+      if (Math.abs(fly.spin - spin) < 0.002 && Math.abs(fly.tilt - tilt) < 0.002) {
+        spin = fly.spin;
+        tilt = fly.tilt;
+        fly = null;
+      }
+      needsRender = true;
+    } else if (!dragging) {
+      /* the globe holds still while the list is open, so a place stays findable */
+      spin += (openMode ? 0 : AUTO) + vSpin;
       vSpin *= 0.955;
       if (Math.abs(vSpin) < 0.00004) vSpin = 0;
-      if (AUTO || vSpin) needsRender = true;
+      if ((AUTO && !openMode) || vSpin) needsRender = true;
     }
     if (needsRender && !document.hidden) {
       resize();
@@ -335,6 +360,7 @@
   var lastX = 0, lastY = 0, moved = 0;
   canvas.addEventListener('pointerdown', function (e) {
     dragging = true;
+    fly = null;
     moved = 0;
     lastX = e.clientX;
     lastY = e.clientY;
@@ -404,9 +430,181 @@
   var base = (mount.getAttribute('data-stats') || '').replace(/\/+$/, '');
   var isLive = /github\.io$|rushiqiang/.test(location.hostname);
 
+  /* The two tallies in the caption double as tabs onto a ranked list:
+     visits → how many visits each place sent; places → how many places per
+     country. Neighbours that overlap on the orb — the Bay Area cluster — are
+     unreadable as marks but perfectly legible as rows. */
+  var PAGE = 5;
+  var openMode = null;   /* null | 'visits' | 'places' */
+  var shown = PAGE;
+  var visitRows = [];
+  var placeRows = [];
+
+  var regionName = (function () {
+    try {
+      var dn = new Intl.DisplayNames(['en'], { type: 'region' });
+      return function (code) {
+        try { return dn.of(code) || code; } catch (e) { return code; }
+      };
+    } catch (e) {
+      return function (code) { return code; };
+    }
+  })();
+
+  function countryOf(label) {
+    var i = label.lastIndexOf(', ');
+    return i === -1 ? label : label.slice(i + 2);
+  }
+
+  function buildRows(points) {
+    visitRows = points.map(function (p) {
+      return {
+        label: p.label || 'Somewhere',
+        value: p.count || 1,
+        lat: p.lat,
+        lon: p.lon,
+        key: p.label || 'Somewhere',
+        note: (p.count || 1) + ((p.count || 1) === 1 ? ' visit' : ' visits')
+      };
+    }).sort(function (a, b) { return b.value - a.value || a.label.localeCompare(b.label); });
+
+    var byCountry = {};
+    for (var i = 0; i < points.length; i++) {
+      var p = points[i];
+      var code = countryOf(p.label || '??');
+      var g = byCountry[code] || (byCountry[code] = { places: 0, visits: 0, top: null });
+      g.places += 1;
+      g.visits += p.count || 1;
+      if (!g.top || (p.count || 1) > (g.top.count || 1)) g.top = p;
+    }
+    placeRows = Object.keys(byCountry).map(function (code) {
+      var g = byCountry[code];
+      return {
+        label: regionName(code),
+        value: g.places,
+        lat: g.top ? g.top.lat : 0,
+        lon: g.top ? g.top.lon : 0,
+        key: g.top ? g.top.label : null,
+        note: g.places + (g.places === 1 ? ' place · ' : ' places · ') +
+              g.visits + (g.visits === 1 ? ' visit' : ' visits')
+      };
+    }).sort(function (a, b) { return b.value - a.value || a.label.localeCompare(b.label); });
+  }
+
+  function flyTo(lat, lon, key) {
+    if (typeof lat !== 'number' || typeof lon !== 'number') return;
+    focusKey = key || null;
+    var targetSpin = -lon * Math.PI / 180;
+    var targetTilt = Math.max(-1.2, Math.min(1.2, lat * Math.PI / 180));
+    /* take the short way round rather than unwinding the whole globe */
+    targetSpin += Math.round((spin - targetSpin) / (2 * Math.PI)) * 2 * Math.PI;
+    vSpin = 0;
+    if (reduced) {
+      spin = targetSpin;
+      tilt = targetTilt;
+      fly = null;
+    } else {
+      fly = { spin: targetSpin, tilt: targetTilt };
+    }
+    needsRender = true;
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function renderPanel() {
+    panel.textContent = '';
+    if (!openMode) {
+      panel.hidden = true;
+      return;
+    }
+    var rows = openMode === 'visits' ? visitRows : placeRows;
+    panel.hidden = false;
+    panel.appendChild(el('div', 'visitor-globe__panel-head',
+      openMode === 'visits' ? 'Visits per place' : 'Places per country'));
+
+    var list = el('ol', 'visitor-globe__list');
+    var n = Math.min(shown, rows.length);
+    for (var i = 0; i < n; i++) {
+      (function (row, rank) {
+        var item = el('li');
+        var btn = el('button', 'visitor-globe__row');
+        btn.type = 'button';
+        btn.title = row.label + ' · ' + row.note;
+        btn.appendChild(el('span', 'visitor-globe__rank', String(rank)));
+        btn.appendChild(el('span', 'visitor-globe__place', row.label));
+        btn.appendChild(el('span', 'visitor-globe__count', row.value.toLocaleString('en-US')));
+        if (focusKey && row.key === focusKey) btn.classList.add('is-focused');
+        btn.addEventListener('click', function () {
+          flyTo(row.lat, row.lon, row.key);
+          renderPanel();
+        });
+        item.appendChild(btn);
+        list.appendChild(item);
+      })(rows[i], i + 1);
+    }
+    panel.appendChild(list);
+
+    if (rows.length > PAGE) {
+      var more = el('button', 'visitor-globe__more');
+      more.type = 'button';
+      if (shown < rows.length) {
+        more.textContent = 'Show ' + Math.min(PAGE, rows.length - shown) + ' more';
+        more.addEventListener('click', function () {
+          shown += PAGE;
+          renderPanel();
+        });
+      } else {
+        more.textContent = 'Show less';
+        more.addEventListener('click', function () {
+          shown = PAGE;
+          renderPanel();
+        });
+      }
+      panel.appendChild(more);
+    }
+  }
+
+  function setMode(mode) {
+    openMode = openMode === mode ? null : mode;
+    shown = PAGE;
+    focusKey = null;   /* a new list means no place is being pointed at yet */
+    var tabs = caption.querySelectorAll('.visitor-globe__stat');
+    for (var i = 0; i < tabs.length; i++) {
+      var on = tabs[i].getAttribute('data-mode') === openMode;
+      tabs[i].classList.toggle('is-open', on);
+      tabs[i].setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    renderPanel();
+    needsRender = true;
+  }
+
+  function statTab(mode, text) {
+    var b = el('button', 'visitor-globe__stat', text);
+    b.type = 'button';
+    b.setAttribute('data-mode', mode);
+    b.setAttribute('aria-expanded', 'false');
+    b.addEventListener('click', function () { setMode(mode); });
+    return b;
+  }
+
+  function buildCaption(visits, places) {
+    caption.textContent = '';
+    caption.appendChild(statTab('visits',
+      visits.toLocaleString('en-US') + (visits === 1 ? ' visit' : ' visits')));
+    caption.appendChild(el('span', 'visitor-globe__sep', '·'));
+    caption.appendChild(statTab('places',
+      places.toLocaleString('en-US') + (places === 1 ? ' place' : ' places')));
+  }
+
   function setMarkers(points) {
     markers = [];
     maxCount = 1;
+    var usable = [];
     for (var i = 0; i < points.length; i++) {
       var p = points[i];
       if (typeof p.lat !== 'number' || typeof p.lon !== 'number') continue;
@@ -419,11 +617,14 @@
         count: p.count || 1,
         label: p.label || 'Somewhere'
       });
+      usable.push(p);
       if ((p.count || 1) > maxCount) maxCount = p.count || 1;
     }
-    var visits = points.reduce(function (a, p) { return a + (p.count || 1); }, 0);
+    var visits = usable.reduce(function (a, p) { return a + (p.count || 1); }, 0);
     if (visits > 0) {
-      caption.textContent = visits.toLocaleString('en-US') + (visits === 1 ? ' visit · ' : ' visits · ') + points.length + (points.length === 1 ? ' place' : ' places');
+      buildRows(usable);
+      buildCaption(visits, usable.length);
+      renderPanel();
     }
     needsRender = true;
   }

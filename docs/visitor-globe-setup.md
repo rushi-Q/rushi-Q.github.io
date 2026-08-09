@@ -48,6 +48,12 @@ Finally put the printed URL into `_config.yml` as `visitor_stats_url` and push.
    shows a bordeaux diamond per city, sized by visit count, with a
    "N visits · M places" line underneath.
 
+Both halves of that line are clickable: **visits** opens a ranked list of visits
+per place, **places** the number of places per country. Each list shows five rows
+at a time with a "show more" step, and clicking a row turns the globe to that
+place and rings it — which is how you read clusters (the Bay Area, say) whose
+marks overlap at this scale.
+
 ## Notes
 
 - The worker only accepts requests from `https://rushi-q.github.io` (CORS). If
