@@ -12,6 +12,20 @@ repository               : "https://github.com/rushi-Q/rushi-Q.github.io"
 visitor_stats_url        : "https://visits.rushi-qiang.workers.dev"
 google_scholar_stats_use_cdn : false
 
+# Blog — see docs/blog-setup.md
+blog:
+  title                  : "Blog"
+
+# Post likes. Blank falls back to visitor_stats_url — the same Cloudflare
+# Worker as the globe, which needs the /likes routes (docs/blog-setup.md).
+# Until it is deployed the heart still toggles, it just shows no counter.
+likes_url                : ""
+
+# Comments — anonymous, named, or GitHub-verified. Same Worker again; blank
+# falls back to visitor_stats_url. Set to "off" to hide comments entirely.
+comments:
+  endpoint               : ""
+
 # google analytics
 google_analytics_id      :  # get google_analytics_id from https://analytics.google.com/analytics/
 
@@ -127,6 +141,15 @@ defaults:
     values:
       layout: default
       author_profile: true
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author_profile: true
+      comments: true
+      likes: true
 
 
 # Sass/SCSS
@@ -136,7 +159,7 @@ sass:
 
 
 # Outputting
-permalink: /:categories/:title/
+permalink: /blog/:year/:title/
 timezone: America/New_York # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 

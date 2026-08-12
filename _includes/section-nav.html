@@ -1,0 +1,22 @@
+{%- comment -%}
+Section tabs — About / Blog. Entries come from _data/navigation.yml.
+{%- endcomment -%}
+{% if site.data.navigation.main.size > 1 %}
+<nav class="section-nav" aria-label="Sections">
+  <ul class="section-nav__list">
+    {% for item in site.data.navigation.main %}
+      {%- assign is_current = false -%}
+      {%- if item.match == 'exact' -%}
+        {%- if page.url == item.url -%}{%- assign is_current = true -%}{%- endif -%}
+      {%- else -%}
+        {%- if page.url contains item.url -%}{%- assign is_current = true -%}{%- endif -%}
+      {%- endif -%}
+      <li class="section-nav__item">
+        <a class="section-nav__link{% if is_current %} is-current{% endif %}"
+           href="{{ item.url | relative_url }}"
+           target="_self"{% if is_current %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}

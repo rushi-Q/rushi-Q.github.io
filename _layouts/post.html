@@ -1,0 +1,38 @@
+---
+layout: default
+author_profile: true
+---
+
+<div class="post" itemscope itemtype="https://schema.org/BlogPosting">
+
+  <a class="post__back" href="{{ '/blog/' | relative_url }}" target="_self">&larr; {{ site.blog.title | default: 'Writing' }}</a>
+
+  <header class="post__head">
+    <p class="post__kicker">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span class="post__sep">&middot;</span>{% include reading-time.html post=page %} min read
+    </p>
+
+    <h1 class="post__title" itemprop="headline">{{ page.title }}</h1>
+
+    {% if page.subtitle %}<p class="post__subtitle">{{ page.subtitle }}</p>{% endif %}
+
+    {% if page.tags.size > 0 %}
+      <p class="post__tags">{% for tag in page.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}</p>
+    {% endif %}
+  </header>
+
+  <div class="post__body" itemprop="articleBody">
+    {% if page.external %}
+    <p class="note">This one was published at <a href="{{ page.external }}">{{ page.source | default: page.external }}</a>. Taking you there now — <a href="{{ page.external }}">follow the link</a> if nothing happens.</p>
+    {% endif %}
+    {{ content }}
+  </div>
+
+  <footer class="post__footer">
+    {% include post-reactions.html %}
+    {% include post-nav.html %}
+    {% include comments.html %}
+  </footer>
+
+</div>

@@ -1,0 +1,15 @@
+{%- comment -%}
+Reading time in minutes for include.post.
+
+`number_of_words` splits on whitespace, which badly undercounts Chinese, so a
+post can opt into character-based counting with `lang: zh` in its front matter.
+{%- endcomment -%}
+{%- assign _p = include.post -%}
+{%- if _p.lang == 'zh' or _p.lang == 'cn' or _p.lang == 'zh-CN' -%}
+  {%- assign _chars = _p.content | strip_html | strip_newlines | replace: ' ', '' | size -%}
+  {%- assign _min = _chars | divided_by: 400 | plus: 1 -%}
+{%- else -%}
+  {%- assign _words = _p.content | number_of_words -%}
+  {%- assign _min = _words | divided_by: 200 | plus: 1 -%}
+{%- endif -%}
+{{- _min -}}

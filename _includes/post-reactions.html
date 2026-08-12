@@ -1,0 +1,20 @@
+{%- comment -%}
+Like button. Counts live in the same Cloudflare Worker + KV that backs the
+visitor globe (see docs/blog-setup.md). With no endpoint configured the heart
+still toggles, it just keeps the state in localStorage instead of the server.
+{%- endcomment -%}
+{%- assign likes_endpoint = site.likes_url | default: site.visitor_stats_url -%}
+{% if page.likes != false %}
+<div class="post-actions">
+  <button class="like-btn" type="button" aria-pressed="false"
+          data-like-slug="{{ page.url }}"
+          {% if likes_endpoint %}data-like-endpoint="{{ likes_endpoint }}"{% endif %}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 20.6C12 20.6 3.4 15.1 3.4 9.3a4.7 4.7 0 0 1 8.6-2.7 4.7 4.7 0 0 1 8.6 2.7c0 5.8-8.6 11.3-8.6 11.3Z"/>
+    </svg>
+    <span class="like-btn__count" data-like-count></span>
+    <span class="like-btn__label">Like</span>
+  </button>
+</div>
+{% endif %}

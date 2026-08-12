@@ -1,0 +1,21 @@
+{%- comment -%}
+Jekyll sorts a collection chronologically, so `previous` is the older post and
+`next` is the newer one.
+{%- endcomment -%}
+{% if page.previous or page.next %}
+<nav class="post-nav" aria-label="Post navigation">
+  {% if page.previous %}
+    <a class="post-nav__link post-nav__link--prev" href="{{ page.previous.url | relative_url }}" target="_self" rel="prev">
+      <span class="post-nav__dir">&larr; Older</span>
+      <span class="post-nav__title">{{ page.previous.title }}</span>
+    </a>
+  {% else %}<span></span>{% endif %}
+
+  {% if page.next %}
+    <a class="post-nav__link post-nav__link--next" href="{{ page.next.url | relative_url }}" target="_self" rel="next">
+      <span class="post-nav__dir">Newer &rarr;</span>
+      <span class="post-nav__title">{{ page.next.title }}</span>
+    </a>
+  {% else %}<span></span>{% endif %}
+</nav>
+{% endif %}

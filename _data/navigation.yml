@@ -1,6 +1,10 @@
-# main links links
+# Sections of the site. Rendered by _includes/section-nav.html above the page
+# content. `match` decides when an entry is highlighted: "exact" for the front
+# page, "prefix" for anything living under a path.
 main:
-  - title: "About Me"
-    url: "/#about-me"
-
-
+  - title: "About"
+    url: /
+    match: exact
+  - title: "Blog"
+    url: /blog/
+    match: prefix

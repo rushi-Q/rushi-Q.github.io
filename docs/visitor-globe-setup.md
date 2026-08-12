@@ -2,7 +2,7 @@
 
 The sidebar globe renders and rotates entirely on the site. To make it show real
 visitor locations and counts, it needs a tiny free backend that records where
-visits come from. The ready-made code is in `docs/visitor-globe-worker.js` and runs
+visits come from. The ready-made code is in `docs/worker.js` and runs
 on Cloudflare Workers (free tier: 100k requests/day, far more than enough).
 
 It stores **only aggregated city-level counts** — no IP addresses, no cookies
@@ -34,7 +34,7 @@ Finally put the printed URL into `_config.yml` as `visitor_stats_url` and push.
 2. **Storage & Databases → KV → Create namespace** — name it `visitor-globe`.
 3. **Workers & Pages → Create → Worker** — name it `visits` (this becomes the
    URL), click **Deploy**, then **Edit code**, replace the sample with the
-   contents of `docs/visitor-globe-worker.js`, and **Deploy** again.
+   contents of `docs/worker.js`, and **Deploy** again.
 4. In the worker: **Settings → Bindings → Add → KV namespace** — variable name
    `VISITS`, namespace `visitor-globe`. Save (it redeploys).
 5. Copy the worker URL, e.g. `https://visits.<your-subdomain>.workers.dev`, and

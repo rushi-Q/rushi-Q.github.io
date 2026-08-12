@@ -1,0 +1,1401 @@
+/* ==========================================================================
+   Blog — the reading room
+   --------------------------------------------------------------------------
+   Same ivory & ink language as the front page: Fraunces over Source Serif 4,
+   hairline rules in warm border, a single oxblood accent, diamond marks.
+
+   Everything is nested under .page__content so these rules outrank the
+   theme's own page/base styles without reaching for !important.
+   ========================================================================== */
+
+$post-measure      : 40rem;   // ~78 characters at 1.02em Source Serif
+$post-measure-wide : 52rem;   // figures and code may break out this far
+
+@mixin kicker($color: $oxblood) {
+  font-family: $serif;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $color;
+}
+
+@mixin diamond($color: rgba($oxblood, 0.55), $size: 0.34em) {
+  content: '';
+  display: inline-block;
+  width: $size;
+  height: $size;
+  background: $color;
+  transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   Section tabs — About / Blog
+   Lives in .page__inner-wrap, above .page__content, so it is not nested below.
+   ========================================================================== */
+
+.section-nav {
+  margin: 0 0 2.8em;
+  border-bottom: 1px solid $warm-border;
+
+  .section-nav__list {
+    display: flex;
+    gap: 2.1em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .section-nav__item { margin: 0; padding: 0; }
+
+  /* Fraunces, sentence case — the same voice as the headings, sized down.
+     The rail sits on the section's own rule, so the current tab reads as a
+     tab rather than as a highlighted word. */
+  .section-nav__link {
+    display: block;
+    padding: 0.1em 0 0.6em;
+    margin-bottom: -1px;
+    font-family: $display-serif;
+    font-size: 1.06em;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    letter-spacing: 0.012em;
+    line-height: 1.3;
+    color: $sepia;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      color: $ink;
+      border-bottom-color: rgba($oxblood, 0.3);
+      text-decoration: none;
+    }
+
+    &.is-current {
+      color: $ink;
+      border-bottom-color: $oxblood;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $oxblood;
+      outline-offset: 3px;
+    }
+  }
+}
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page__content {
+
+  /* ======================================================================
+     Index — /blog/
+     ====================================================================== */
+
+  .blog-index {
+    max-width: $post-measure;
+
+    /* ---- masthead ---- */
+    .blog-index__title {
+      font-family: $display-serif;
+      font-weight: 600;
+      font-size: 2.1em;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      color: $ink;
+      margin: 0 0 0.4em;
+      padding: 0;
+      border: 0;
+
+      &::after { content: none; }
+    }
+
+    /* the page's epigraph — the same voice as the front page's opening line */
+    .blog-index__epigraph {
+      max-width: 34rem;
+      font-family: $display-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.22em;
+      line-height: 1.55;
+      color: $ink;
+      margin: 0 0 1.7em;
+    }
+
+    .blog-index__feed {
+      @include kicker($sepia);
+      display: inline-block;
+      border-bottom: none;
+      text-decoration: none;
+
+      &:hover { color: $oxblood; }
+
+      .fas { font-size: 0.9em; }
+    }
+  }
+
+  /* ---- empty state: an intentional blank page, not a broken one ---- */
+  .blog-empty {
+    max-width: $post-measure;
+    margin-top: 2.5em;
+    padding: 2.6em 0;
+    border-top: 1px solid $warm-border;
+    border-bottom: 1px solid $warm-border;
+    text-align: center;
+
+    .blog-empty__mark {
+      display: block;
+      margin: 0 auto 1em;
+      width: 0.5em;
+      height: 0.5em;
+      background: rgba($oxblood, 0.5);
+      transform: rotate(45deg);
+    }
+
+    .blog-empty__text {
+      font-family: $display-serif;
+      font-style: italic;
+      font-size: 1.1em;
+      color: $sepia;
+      margin: 0;
+    }
+  }
+
+  /* ---- year groups ---- */
+  .blog-year {
+    margin-top: 2.4em;
+
+    .blog-year__label {
+      @include kicker($sepia);
+      font-size: 0.7em;
+      margin: 0 0 1em;
+      padding: 0 0 0.7em;
+      border-bottom: 1px solid $warm-border;
+    }
+  }
+
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .post-list__item {
+    margin: 0;
+    padding: 1.5em 0;
+    border-bottom: 1px solid $warm-border;
+
+    &:last-child { border-bottom: none; }
+  }
+
+  .post-list__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5em;
+  }
+
+  a.post-list__link {
+    flex: 1 1 auto;
+    font-family: $display-serif;
+    font-weight: 600;
+    font-size: 1.12em;
+    line-height: 1.4;
+    color: $ink;
+    border-bottom: none;
+    text-decoration: none;
+
+    &:hover {
+      color: $oxblood;
+      border-bottom: none;
+      text-decoration: none;
+    }
+  }
+
+  .post-list__ext {
+    display: inline-block;
+    margin-left: 0.35em;
+    font-size: 0.8em;
+    color: $sepia;
+    vertical-align: 0.1em;
+  }
+
+  .post-list__date {
+    flex: 0 0 auto;
+    font-style: italic;
+    font-size: 0.9em;
+    color: $sepia;
+    white-space: nowrap;
+  }
+
+  .post-list__excerpt {
+    margin: 0.45em 0 0;
+    font-size: 0.98em;
+    line-height: 1.6;
+    color: $sepia;
+
+    p { margin: 0; color: $sepia; }
+  }
+
+  .post-list__meta {
+    margin: 0.6em 0 0;
+    font-size: 0.78em;
+    color: $sepia;
+
+    .post-list__sep {
+      display: inline-block;
+      margin: 0 0.55em;
+      opacity: 0.5;
+    }
+  }
+
+  a.post-tag,
+  .post-tag {
+    @include kicker;
+    display: inline-block;
+    font-size: 0.72em;
+    margin-right: 0.9em;
+    border-bottom: none;
+    text-decoration: none;
+
+    &::before {
+      @include diamond(rgba($oxblood, 0.5), 0.3em);
+      margin-right: 0.5em;
+      vertical-align: 0.08em;
+    }
+  }
+
+  /* ======================================================================
+     Single post
+     ====================================================================== */
+
+  .post {
+    max-width: $post-measure;
+  }
+
+  a.post__back {
+    @include kicker($sepia);
+    display: inline-block;
+    margin-bottom: 2em;
+    border-bottom: none;
+    text-decoration: none;
+
+    &:hover { color: $oxblood; }
+  }
+
+  .post__head {
+    margin-bottom: 2.2em;
+    padding-bottom: 1.4em;
+    border-bottom: 1px solid $warm-border;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 2.6rem;
+      height: 1px;
+      background: $oxblood;
+    }
+  }
+
+  .post__kicker {
+    @include kicker;
+    margin: 0 0 0.7em;
+
+    .post__sep {
+      display: inline-block;
+      margin: 0 0.55em;
+      opacity: 0.5;
+    }
+  }
+
+  .post__title {
+    font-family: $display-serif;
+    font-weight: 700;
+    font-size: 2.15em;
+    line-height: 1.15;
+    letter-spacing: 0.005em;
+    color: $ink;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &::after { content: none; }
+    &::before { content: none; }
+  }
+
+  .post__subtitle {
+    font-family: $display-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.22em;
+    line-height: 1.5;
+    color: $sepia;
+    margin: 0.5em 0 0;
+  }
+
+  .post__tags { margin: 1.1em 0 0; }
+
+  /* ---- body typography ------------------------------------------------ */
+
+  .post__body {
+    font-size: 1.02em;
+    line-height: 1.75;
+
+    > p:first-child { margin-top: 0; }
+
+    p {
+      margin: 0 0 1.15em;
+      color: $ink;
+    }
+
+    /* an editorial opening: the first paragraph carries a touch more weight */
+    > p:first-child {
+      font-size: 1.06em;
+      color: $ink;
+    }
+
+    h2 {
+      font-family: $display-serif;
+      font-weight: 600;
+      font-size: 1.42em;
+      line-height: 1.3;
+      color: $ink;
+      margin: 1.9em 0 0.55em;
+      padding: 0;
+      border: 0;
+
+      &::after { content: none; }
+      &::before { content: none; }
+    }
+
+    h3 {
+      font-family: $display-serif;
+      font-weight: 600;
+      font-size: 1.14em;
+      color: $ink;
+      margin: 1.6em 0 0.45em;
+    }
+
+    h4 {
+      font-family: $serif;
+      font-weight: 600;
+      font-size: 1em;
+      letter-spacing: 0.02em;
+      color: $sepia;
+      margin: 1.4em 0 0.4em;
+    }
+
+    ul, ol {
+      margin: 0 0 1.15em;
+      padding-left: 0;
+    }
+
+    li {
+      color: $ink;
+      margin-bottom: 0.4em;
+      line-height: 1.7;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 0;
+
+      > li {
+        position: relative;
+        padding-left: 1.15em;
+
+        &::before {
+          @include diamond;
+          position: absolute;
+          left: 0;
+          top: 0.68em;
+        }
+      }
+    }
+
+    ol { margin-left: 1.2em; }
+
+    ul ul, ol ol, ul ol, ol ul {
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+
+    blockquote {
+      margin: 1.6em 0;
+      padding: 0.15em 0 0.15em 1.2em;
+      border-left: 2px solid $oxblood;
+      font-family: $display-serif;
+      font-style: italic;
+      font-size: 1.05em;
+      color: $sepia;
+
+      p { color: $sepia; }
+      p:last-child { margin-bottom: 0; }
+
+      cite {
+        display: block;
+        margin-top: 0.6em;
+        font-family: $serif;
+        font-style: normal;
+        font-size: 0.8em;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $sepia;
+        opacity: 0.85;
+      }
+    }
+
+    hr {
+      width: 4rem;
+      margin: 2.6em 0;
+      border: 0;
+      border-top: 1px solid $warm-border;
+      position: relative;
+
+      &::after {
+        @include diamond(rgba($oxblood, 0.45), 0.3em);
+        position: absolute;
+        left: 0;
+        top: -0.15em;
+      }
+    }
+
+    strong { font-weight: 600; color: $ink; }
+    em     { font-style: italic; }
+
+    abbr[title] {
+      border-bottom: 1px dotted $warm-border;
+      cursor: help;
+      text-decoration: none;
+    }
+
+    /* ---- images & figures -------------------------------------------- */
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 3px;
+    }
+
+    figure {
+      margin: 2.2em 0;
+      padding: 0;
+      text-align: center;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        box-shadow: 0 2px 16px rgba(60, 45, 30, 0.14);
+      }
+
+      figcaption {
+        margin-top: 0.85em;
+        font-size: 0.84em;
+        font-style: italic;
+        line-height: 1.55;
+        color: $sepia;
+        text-align: center;
+
+        a { color: $sepia; }
+      }
+    }
+
+    /* a lone image in its own paragraph gets the same treatment */
+    p > img:only-child {
+      display: block;
+      margin: 2.2em auto;
+      box-shadow: 0 2px 16px rgba(60, 45, 30, 0.14);
+    }
+
+    /* opt-in: break the reading measure for wide diagrams.
+       .post is capped at $post-measure; the figure simply runs past it to the
+       right, still well inside the page column, so the page never scrolls. */
+    figure.figure--wide {
+      @media (min-width: 62em) {
+        width: $post-measure-wide;
+        max-width: none;
+      }
+    }
+
+    /* two images side by side */
+    figure.figure--row {
+      display: flex;
+      gap: 1em;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      img { flex: 1 1 14em; min-width: 12em; }
+      figcaption { flex: 1 1 100%; }
+    }
+
+    /* ---- code --------------------------------------------------------- */
+
+    code {
+      font-family: $monospace;
+      font-size: 0.84em;
+      padding: 0.12em 0.36em;
+      border-radius: 3px;
+      background: $code-background-color;
+      color: mix(#000, $oxblood, 15%);
+    }
+
+    div.highlighter-rouge,
+    figure.highlight,
+    pre.highlight {
+      margin: 1.7em 0;
+      padding: 1.1em 1.2em;
+      border: 1px solid $warm-border;
+      border-left: 2px solid rgba($oxblood, 0.5);
+      border-radius: 3px;
+      background: $code-background-color;
+      box-shadow: none;
+      overflow-x: auto;
+
+      &::before { content: none; }   /* the theme's floating fontawesome badge */
+
+      pre, code {
+        padding: 0;
+        background: none;
+        border: 0;
+        color: $ink;
+        font-size: 0.84em;
+        line-height: 1.7;
+      }
+
+      .highlight {
+        margin: 0;
+        font-size: 1em;
+        line-height: 1.7;
+      }
+    }
+
+    /* ---- tables ------------------------------------------------------- */
+
+    table {
+      width: 100%;
+      margin: 1.9em 0;
+      border-collapse: collapse;
+      font-size: 0.92em;
+      border: 0;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+
+      @include breakpoint($medium) {
+        display: table;
+        white-space: normal;
+      }
+    }
+
+    thead {
+      border-bottom: 1px solid $ink;
+      background: none;
+    }
+
+    th {
+      @include kicker($sepia);
+      font-size: 0.7em;
+      text-align: left;
+      padding: 0.5em 0.9em 0.6em 0;
+      border: 0;
+      background: none;
+    }
+
+    td {
+      padding: 0.55em 0.9em 0.55em 0;
+      border: 0;
+      border-bottom: 1px solid $warm-border;
+      color: $ink;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* ---- math --------------------------------------------------------- */
+
+    mjx-container[display="true"],
+    .math-display {
+      display: block;
+      margin: 1.5em 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.2em 0;
+    }
+
+    mjx-container { color: $ink; }
+
+    mjx-container:focus,
+    mjx-container[display="true"]:focus { outline: none; }
+
+    /* ---- footnotes ----------------------------------------------------- */
+
+    sup a.footnote,
+    a.footnote {
+      font-size: 0.78em;
+      border-bottom: none;
+      text-decoration: none;
+      padding: 0 0.1em;
+
+      &:hover { border-bottom: none; }
+    }
+
+    .footnotes {
+      margin-top: 3em;
+      padding-top: 1.2em;
+      border-top: 1px solid $warm-border;
+      font-size: 0.88em;
+      color: $sepia;
+
+      ol { margin-left: 1.2em; }
+
+      li {
+        color: $sepia;
+        margin-bottom: 0.5em;
+
+        &::before { content: none; }
+      }
+
+      p { color: $sepia; margin-bottom: 0.4em; }
+    }
+
+    /* ---- footer notes / asides ---------------------------------------- */
+
+    .note {
+      margin: 1.8em 0;
+      padding: 1em 1.2em;
+      border: 1px solid $warm-border;
+      border-left: 2px solid rgba($oxblood, 0.5);
+      border-radius: 3px;
+      background: rgba($oxblood, 0.03);
+      font-size: 0.94em;
+      color: $sepia;
+
+      p:last-child { margin-bottom: 0; }
+    }
+  }
+
+  /* ======================================================================
+     Post footer — reactions, navigation, comments
+     ====================================================================== */
+
+  .post__footer {
+    max-width: $post-measure;
+    margin-top: 3.2em;
+  }
+
+  .post-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    flex-wrap: wrap;
+    padding-top: 1.6em;
+    border-top: 1px solid $warm-border;
+  }
+
+  /* ---- like ---- */
+  .like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.5em 1.1em;
+    border: 1px solid $warm-border;
+    border-radius: 2em;
+    background: transparent;
+    color: $sepia;
+    font-family: $serif;
+    font-size: 0.84em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: $global-transition;
+    -webkit-appearance: none;
+    appearance: none;
+
+    svg {
+      width: 1.05em;
+      height: 1.05em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease;
+    }
+
+    &:hover {
+      color: $oxblood;
+      border-color: rgba($oxblood, 0.4);
+
+      svg { transform: scale(1.12); }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $oxblood;
+      outline-offset: 2px;
+    }
+
+    &[aria-pressed="true"] {
+      color: $oxblood;
+      border-color: rgba($oxblood, 0.45);
+      background: rgba($oxblood, 0.05);
+
+      svg { fill: currentColor; }
+    }
+
+    &.is-popping svg { animation: like-pop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+    &[disabled] { opacity: 0.5; cursor: default; }
+  }
+
+  .like-btn__count {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    min-width: 1ch;
+  }
+
+  .post-actions__note {
+    font-size: 0.8em;
+    font-style: italic;
+    color: $sepia;
+    opacity: 0.75;
+  }
+
+  /* ---- prev / next ---- */
+  .post-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    margin-top: 2.4em;
+    padding-top: 1.5em;
+    border-top: 1px solid $warm-border;
+  }
+
+  a.post-nav__link {
+    flex: 1 1 0;
+    border-bottom: none;
+    text-decoration: none;
+
+    &.post-nav__link--next { text-align: right; }
+
+    .post-nav__dir {
+      display: block;
+      @include kicker($sepia);
+      font-size: 0.68em;
+      margin-bottom: 0.35em;
+    }
+
+    .post-nav__title {
+      display: block;
+      font-family: $display-serif;
+      font-weight: 600;
+      font-size: 0.98em;
+      line-height: 1.4;
+      color: $ink;
+    }
+
+    &:hover .post-nav__title { color: $oxblood; }
+  }
+
+  /* ---- comments -------------------------------------------------------- */
+
+  .comments {
+    margin-top: 3.2em;
+    padding-top: 1.6em;
+    border-top: 1px solid $warm-border;
+
+    .comments__title {
+      @include kicker($sepia);
+      font-size: 0.72em;
+      font-family: $serif;
+      margin: 0 0 1.7em;
+      padding: 0;
+      border: 0;
+
+      &::after { content: none; }
+      &::before { content: none; }
+    }
+
+    .comments__count {
+      margin-left: 0.5em;
+      color: $oxblood;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .comments__thread {
+      list-style: none;
+      margin: 0 0 2.4em;
+      padding: 0;
+    }
+
+    .comments__state {
+      margin: 0;
+      padding: 0;
+      font-size: 0.94em;
+      font-style: italic;
+      color: $sepia;
+
+      &::before { content: none; }
+    }
+  }
+
+  /* one comment */
+  .c-item {
+    display: flex;
+    gap: 0.9em;
+    margin: 0 0 1.7em;
+    padding: 0;
+
+    &::before { content: none; }
+    &:last-child { margin-bottom: 0; }
+  }
+
+  .c-avatar {
+    flex: 0 0 auto;
+    width: 1.9em;
+    height: 1.9em;
+    margin-top: 0.15em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $display-serif;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1;
+    color: $oxblood;
+    background: rgba($oxblood, 0.16);
+    overflow: hidden;
+  }
+
+  .c-avatar--t1 { background: rgba($oxblood, 0.10); }
+  .c-avatar--t2 { background: rgba($oxblood, 0.18); }
+  .c-avatar--t3 { background: rgba($oxblood, 0.28); }
+  .c-avatar--t4 { background: rgba($oxblood, 0.42); color: $parchment; }
+
+  .c-avatar--img { padding: 0; background: none; }
+
+  .c-avatar--anon {
+    background: none;
+    border: 1px solid $warm-border;
+
+    &::before {
+      @include diamond(rgba($oxblood, 0.5), 0.36em);
+    }
+  }
+
+  .c-main { flex: 1 1 auto; min-width: 0; }
+
+  .c-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7em;
+    flex-wrap: wrap;
+    margin: 0 0 0.25em;
+    font-size: 0.9em;
+  }
+
+  .c-name {
+    font-family: $display-serif;
+    font-weight: 600;
+    color: $ink;
+
+    a {
+      color: $ink;
+      border-bottom: none;
+      text-decoration: none;
+
+      &:hover { color: $oxblood; }
+    }
+  }
+
+  .c-name--anon {
+    font-style: italic;
+    font-weight: 500;
+    color: $sepia;
+  }
+
+  .c-badge {
+    @include kicker($sepia);
+    font-size: 0.62em;
+    margin-left: 0.55em;
+    padding: 0.08em 0.5em;
+    border: 1px solid $warm-border;
+    border-radius: 2em;
+    vertical-align: 0.12em;
+  }
+
+  .c-time {
+    font-style: italic;
+    font-size: 0.86em;
+    color: $sepia;
+  }
+
+  .c-body {
+    font-size: 0.96em;
+    line-height: 1.65;
+
+    p {
+      margin: 0 0 0.5em;
+      color: $ink;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    p:last-child { margin-bottom: 0; }
+  }
+
+  /* ---- the form ---- */
+
+  .comment-form {
+    padding-top: 1.6em;
+    border-top: 1px solid $warm-border;
+
+    textarea,
+    input[type="text"],
+    input[type="url"] {
+      display: block;
+      width: 100%;
+      font-family: $serif;
+      font-size: 0.94em;
+      line-height: 1.6;
+      color: $ink;
+      background: transparent;
+      border: 1px solid $warm-border;
+      border-radius: 3px;
+      padding: 0.6em 0.8em;
+      box-shadow: none;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color 0.2s ease;
+
+      &::placeholder { color: $sepia; opacity: 0.65; }
+
+      &:focus {
+        outline: none;
+        border-color: rgba($oxblood, 0.55);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 5.4em;
+    }
+
+    .comment-form__identity {
+      display: flex;
+      gap: 0.7em;
+      margin-top: 0.7em;
+
+      @media (max-width: 34em) { flex-direction: column; }
+    }
+
+    .comment-form__identity--gh {
+      align-items: center;
+      gap: 0.6em;
+      font-size: 0.88em;
+      color: $sepia;
+
+      &[hidden] { display: none; }
+    }
+
+    .comment-form__gh-avatar {
+      width: 1.6em;
+      height: 1.6em;
+      border-radius: 50%;
+    }
+
+    .comment-form__gh-login b { color: $ink; font-weight: 600; }
+
+    .comment-form__linkish {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 0;
+      font-family: $serif;
+      font-size: 0.94em;
+      font-style: italic;
+      color: $sepia;
+      cursor: pointer;
+      text-decoration: underline;
+
+      &:hover { color: $oxblood; }
+    }
+
+    /* honeypot — off-screen, never focusable in practice */
+    .comment-form__trap {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .comment-form__error {
+      margin: 0.8em 0 0;
+      font-size: 0.86em;
+      color: $oxblood;
+
+      &[hidden] { display: none; }
+    }
+
+    .comment-form__actions {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      flex-wrap: wrap;
+      margin-top: 1.1em;
+    }
+
+    .comment-form__hint {
+      flex: 1 1 auto;
+      font-size: 0.82em;
+      font-style: italic;
+      color: $sepia;
+
+      b { font-style: normal; font-weight: 600; color: $ink; }
+    }
+
+    .comment-form__gh,
+    .comment-form__submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.5em 1.15em;
+      border-radius: 2em;
+      font-family: $serif;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: $global-transition;
+      -webkit-appearance: none;
+      appearance: none;
+
+      &:focus-visible {
+        outline: 2px solid $oxblood;
+        outline-offset: 2px;
+      }
+    }
+
+    .comment-form__gh {
+      border: 1px solid $warm-border;
+      background: transparent;
+      color: $sepia;
+
+      &:hover { color: $ink; border-color: rgba($oxblood, 0.4); }
+      &[hidden] { display: none; }
+    }
+
+    .comment-form__submit {
+      border: 1px solid $oxblood;
+      background: $oxblood;
+      color: $parchment;
+
+      &:hover { background: mix(#000, $oxblood, 18%); border-color: mix(#000, $oxblood, 18%); }
+      &[disabled] { opacity: 0.55; cursor: default; }
+    }
+  }
+}
+
+@keyframes like-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+
+/* ==========================================================================
+   Night
+   ========================================================================== */
+
+html[data-theme="dark"] .section-nav {
+  border-bottom-color: $night-border;
+
+  .section-nav__link {
+    color: $night-muted;
+
+    &:hover {
+      color: $night-text;
+      border-bottom-color: rgba($night-accent, 0.4);
+    }
+
+    &.is-current {
+      color: $night-text;
+      border-bottom-color: $night-accent;
+    }
+
+    &:focus-visible { outline-color: $night-accent; }
+  }
+}
+
+html[data-theme="dark"] .page__content {
+
+  .blog-index {
+    .blog-index__title    { color: $night-text; }
+    .blog-index__epigraph { color: $night-text; }
+    .blog-index__feed     { color: $night-muted; &:hover { color: $night-accent; } }
+  }
+
+  .blog-empty {
+    border-color: $night-border;
+
+    .blog-empty__mark { background: rgba($night-accent, 0.55); }
+    .blog-empty__text { color: $night-muted; }
+  }
+
+  .blog-year .blog-year__label {
+    color: $night-muted;
+    border-bottom-color: $night-border;
+  }
+
+  .post-list__item { border-bottom-color: $night-border; }
+
+  a.post-list__link {
+    color: $night-text;
+    &:hover { color: $night-accent; }
+  }
+
+  .post-list__date,
+  .post-list__meta,
+  .post-list__ext { color: $night-muted; }
+
+  .post-list__excerpt,
+  .post-list__excerpt p { color: $night-muted; }
+
+  a.post-tag, .post-tag {
+    color: $night-accent;
+    &::before { background: rgba($night-accent, 0.5); }
+  }
+
+  a.post__back {
+    color: $night-muted;
+    &:hover { color: $night-accent; }
+  }
+
+  .post__head {
+    border-bottom-color: $night-border;
+    &::after { background: $night-accent; }
+  }
+
+  .post__kicker   { color: $night-accent; }
+  .post__title    { color: $night-text; }
+  .post__subtitle { color: $night-muted; }
+
+  .post__body {
+    p, li, strong, h2, h3, td { color: $night-text; }
+    h4 { color: $night-muted; }
+
+    ul > li::before { background: rgba($night-accent, 0.6); }
+
+    blockquote {
+      border-left-color: $night-accent;
+      color: $night-muted;
+
+      p, cite { color: $night-muted; }
+    }
+
+    hr {
+      border-top-color: $night-border;
+      &::after { background: rgba($night-accent, 0.5); }
+    }
+
+    abbr[title] { border-bottom-color: $night-border; }
+
+    figure img,
+    p > img:only-child {
+      box-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    figure figcaption,
+    figure figcaption a { color: $night-muted; }
+
+    code {
+      background: #2a2620;
+      color: mix(#fff, $night-accent, 15%);
+    }
+
+    div.highlighter-rouge,
+    figure.highlight,
+    pre.highlight {
+      background: #262119;
+      border-color: $night-border;
+      border-left-color: rgba($night-accent, 0.5);
+
+      pre, code { color: $night-text; background: none; }
+    }
+
+    thead { border-bottom-color: $night-text; }
+    th    { color: $night-muted; }
+    td    { border-bottom-color: $night-border; }
+
+    mjx-container { color: $night-text; }
+
+    .footnotes {
+      border-top-color: $night-border;
+      color: $night-muted;
+
+      li, p { color: $night-muted; }
+    }
+
+    .note {
+      border-color: $night-border;
+      border-left-color: rgba($night-accent, 0.5);
+      background: rgba($night-accent, 0.05);
+      color: $night-muted;
+    }
+  }
+
+  .post-actions { border-top-color: $night-border; }
+
+  .like-btn {
+    border-color: $night-border;
+    color: $night-muted;
+
+    &:hover {
+      color: $night-accent;
+      border-color: rgba($night-accent, 0.45);
+    }
+
+    &[aria-pressed="true"] {
+      color: $night-accent;
+      border-color: rgba($night-accent, 0.5);
+      background: rgba($night-accent, 0.08);
+    }
+
+    &:focus-visible { outline-color: $night-accent; }
+  }
+
+  .post-actions__note { color: $night-muted; }
+
+  .post-nav { border-top-color: $night-border; }
+
+  a.post-nav__link {
+    .post-nav__dir   { color: $night-muted; }
+    .post-nav__title { color: $night-text; }
+    &:hover .post-nav__title { color: $night-accent; }
+  }
+
+  .comments {
+    border-top-color: $night-border;
+
+    .comments__title { color: $night-muted; }
+    .comments__count { color: $night-accent; }
+    .comments__state { color: $night-muted; }
+  }
+
+  .c-avatar    { color: $night-accent; background: rgba($night-accent, 0.16); }
+  .c-avatar--t1 { background: rgba($night-accent, 0.10); }
+  .c-avatar--t2 { background: rgba($night-accent, 0.18); }
+  .c-avatar--t3 { background: rgba($night-accent, 0.28); }
+  .c-avatar--t4 { background: rgba($night-accent, 0.42); color: $night-bg; }
+  .c-avatar--img { background: none; }
+
+  .c-avatar--anon {
+    background: none;
+    border-color: $night-border;
+
+    &::before { background: rgba($night-accent, 0.55); }
+  }
+
+  .c-name {
+    color: $night-text;
+
+    a { color: $night-text; &:hover { color: $night-accent; } }
+  }
+
+  .c-name--anon { color: $night-muted; }
+
+  .c-badge {
+    color: $night-muted;
+    border-color: $night-border;
+  }
+
+  .c-time { color: $night-muted; }
+
+  .c-body p { color: $night-text; }
+
+  .comment-form {
+    border-top-color: $night-border;
+
+    textarea,
+    input[type="text"],
+    input[type="url"] {
+      color: $night-text;
+      border-color: $night-border;
+      background: rgba(#000, 0.18);
+
+      &::placeholder { color: $night-muted; opacity: 0.7; }
+      &:focus { border-color: rgba($night-accent, 0.6); }
+    }
+
+    .comment-form__identity--gh { color: $night-muted; }
+    .comment-form__gh-login b { color: $night-text; }
+
+    .comment-form__linkish {
+      color: $night-muted;
+      &:hover { color: $night-accent; }
+    }
+
+    .comment-form__error { color: mix(#fff, $night-accent, 10%); }
+
+    .comment-form__hint {
+      color: $night-muted;
+      b { color: $night-text; }
+    }
+
+    .comment-form__gh {
+      border-color: $night-border;
+      color: $night-muted;
+
+      &:hover { color: $night-text; border-color: rgba($night-accent, 0.45); }
+      &:focus-visible { outline-color: $night-accent; }
+    }
+
+    .comment-form__submit {
+      border-color: $night-accent;
+      background: $night-accent;
+      color: $night-bg;
+
+      &:hover {
+        background: mix(#fff, $night-accent, 18%);
+        border-color: mix(#fff, $night-accent, 18%);
+      }
+      &:focus-visible { outline-color: $night-accent; }
+    }
+  }
+}
+
+
+/* ==========================================================================
+   Syntax highlighting — night overrides for Rouge
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  .highlight {
+    .c, .cd, .cm, .c1, .cs { color: #7d7568; font-style: italic; }  // comments
+    .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #d8a0ae; }            // keywords
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr { color: #a7bf95; } // strings
+    .n, .na, .nb, .nc, .nd, .ni, .nl, .nn, .nx, .py, .nv { color: #ece7dd; }
+    .nf, .nb { color: #e2c08a; }                                     // functions
+    .m, .mf, .mh, .mi, .mo, .il { color: #cbb2e0; }                  // numbers
+    .o, .ow { color: #c3bbae; }                                      // operators
+    .p { color: #c3bbae; }
+    .err { color: #e88b8b; background: none; }
+    .gd { color: #e88b8b; }
+    .gi { color: #a7bf95; }
+    .lineno { color: #5f594f; }
+  }
+}

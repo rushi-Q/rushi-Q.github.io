@@ -1,23 +1,68 @@
-<link rel="apple-touch-icon" sizes="180x180" href="images/icon.jpg">
-<link rel="icon" type="image/png" sizes="32x32" href="images/icon.jpg">
-<link rel="icon" type="image/png" sizes="16x16" href="images/icon.jpg">
-<link rel="manifest" href="images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/images/icon.jpg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/images/icon.jpg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/images/icon.jpg' | relative_url }}">
+<link rel="manifest" href="{{ '/images/site.webmanifest' | relative_url }}">
 
 <meta name="msapplication-TileColor" content="#000000">
-<meta name="msapplication-TileImage" content="images/mstile-144x144.png?v=M44lzPylqQ">
-<meta name="msapplication-config" content="images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="msapplication-TileImage" content="{{ '/images/mstile-144x144.png' | relative_url }}?v=M44lzPylqQ">
+<meta name="msapplication-config" content="{{ '/images/browserconfig.xml' | relative_url }}?v=M44lzPylqQ">
 <meta name="theme-color" content="#faf8f4">
-<link rel="stylesheet" href="assets/css/academicons.css"/>
 
-<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
+{% if page.external %}<!-- entry published elsewhere: send readers to the original -->
+<meta http-equiv="refresh" content="0; url={{ page.external }}">
+<link rel="canonical" href="{{ page.external }}">
+{% endif %}
+<link rel="stylesheet" href="{{ '/assets/css/academicons.css' | relative_url }}"/>
+
+<!-- ==========================================================================
+     MathJax 3
+     --------------------------------------------------------------------------
+     kramdown renders math into <script type="math/tex"> tags, which MathJax 2
+     understood natively and MathJax 3 does not. pageReady rewrites them into
+     \(…\) / \[…\] before the first typeset, so both kramdown's $$…$$ and raw
+     $…$ written straight into the page work.
+     ========================================================================== -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      macros: {
+        R: '{\\mathbb{R}}',
+        E: '{\\mathbb{E}}',
+        argmax: '{\\operatorname{arg\\,max}}',
+        argmin: '{\\operatorname{arg\\,min}}'
+      }
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'annotation', 'annotation-xml'],
+      ignoreHtmlClass: 'no-mathjax',
+      menuOptions: { settings: { inTabOrder: false } }
+    },
+    chtml: {
+      scale: 1.0,
+      matchFontHeight: true
+    },
+    startup: {
+      pageReady: function () {
+        var nodes = document.querySelectorAll('script[type^="math/tex"]');
+        for (var i = 0; i < nodes.length; i++) {
+          var el = nodes[i];
+          var display = el.type.indexOf('mode=display') > -1;
+          var tex = el.textContent;
+          var box = document.createElement(display ? 'div' : 'span');
+          box.className = display ? 'math-display' : 'math-inline';
+          box.textContent = display ? '\\[' + tex + '\\]' : '\\(' + tex + '\\)';
+          el.parentNode.replaceChild(box, el);
+        }
+        return window.MathJax.startup.defaultPageReady();
+      }
     }
-  });
+  };
 </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 
 <!-- end custom head snippets -->

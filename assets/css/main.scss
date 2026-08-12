@@ -800,3 +800,6 @@ html[data-theme="dark"] {
         }
     }
 }
+
+/* Imported last so the blog's own rules outrank the theme defaults above. */
+@import "blog";

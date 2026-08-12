@@ -1,7 +1,15 @@
 name = "visits"
-main = "visitor-globe-worker.js"
+main = "worker.js"
 compatibility_date = "2026-08-01"
 
 [[kv_namespaces]]
 binding = "VISITS"
 id = "bf29eca227964e9f92ebf7cd6844df64"
+
+# Optional — enables "Sign in with GitHub" on comments.
+# [vars]
+# GITHUB_CLIENT_ID = "Iv1.xxxxxxxxxxxx"
+#
+# Secrets (never in this file):
+#   npx wrangler secret put GITHUB_CLIENT_SECRET
+#   npx wrangler secret put ADMIN_TOKEN
