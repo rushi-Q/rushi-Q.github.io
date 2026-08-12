@@ -10,17 +10,9 @@ author_profile: true
   <header class="blog-index__head">
     <h1 class="blog-index__title">{{ site.blog.title | default: "Blog" }}</h1>
     <p class="blog-index__epigraph">I write at night to document my thoughts.</p>
-    <a class="blog-index__feed" href="{{ '/feed.xml' | relative_url }}"><i class="fas fa-rss" aria-hidden="true"></i>&nbsp; RSS</a>
   </header>
 
-  {% if site.posts.size == 0 %}
-
-  <div class="blog-empty">
-    <span class="blog-empty__mark" aria-hidden="true"></span>
-    <p class="blog-empty__text">Nothing here yet — the first note is still being written.</p>
-  </div>
-
-  {% else %}
+  {% if site.posts.size > 0 %}
 
   {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
   {% for year in posts_by_year %}

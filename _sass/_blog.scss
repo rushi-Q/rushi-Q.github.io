@@ -131,44 +131,6 @@ $post-measure-wide : 52rem;   // figures and code may break out this far
       color: $ink;
       margin: 0 0 1.7em;
     }
-
-    .blog-index__feed {
-      @include kicker($sepia);
-      display: inline-block;
-      border-bottom: none;
-      text-decoration: none;
-
-      &:hover { color: $oxblood; }
-
-      .fas { font-size: 0.9em; }
-    }
-  }
-
-  /* ---- empty state: an intentional blank page, not a broken one ---- */
-  .blog-empty {
-    max-width: $post-measure;
-    margin-top: 2.5em;
-    padding: 2.6em 0;
-    border-top: 1px solid $warm-border;
-    border-bottom: 1px solid $warm-border;
-    text-align: center;
-
-    .blog-empty__mark {
-      display: block;
-      margin: 0 auto 1em;
-      width: 0.5em;
-      height: 0.5em;
-      background: rgba($oxblood, 0.5);
-      transform: rotate(45deg);
-    }
-
-    .blog-empty__text {
-      font-family: $display-serif;
-      font-style: italic;
-      font-size: 1.1em;
-      color: $sepia;
-      margin: 0;
-    }
   }
 
   /* ---- year groups ---- */
@@ -1146,14 +1108,6 @@ html[data-theme="dark"] .page__content {
   .blog-index {
     .blog-index__title    { color: $night-text; }
     .blog-index__epigraph { color: $night-text; }
-    .blog-index__feed     { color: $night-muted; &:hover { color: $night-accent; } }
-  }
-
-  .blog-empty {
-    border-color: $night-border;
-
-    .blog-empty__mark { background: rgba($night-accent, 0.55); }
-    .blog-empty__text { color: $night-muted; }
   }
 
   .blog-year .blog-year__label {
