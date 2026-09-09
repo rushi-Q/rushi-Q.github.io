@@ -456,6 +456,15 @@
     return i === -1 ? label : label.slice(i + 2);
   }
 
+  function normalizePlaceLabel(label) {
+    /* Apply the site's country grouping to both historical and new visit data. */
+    var country = countryOf(label);
+    if (/^(CN|HK|MO|TW|China|Hong Kong|Macao|Macau|Taiwan)$/i.test(country)) {
+      return label.slice(0, label.length - country.length) + 'China';
+    }
+    return label;
+  }
+
   function buildRows(points) {
     visitRows = points.map(function (p) {
       return {
@@ -608,6 +617,12 @@
     for (var i = 0; i < points.length; i++) {
       var p = points[i];
       if (typeof p.lat !== 'number' || typeof p.lon !== 'number') continue;
+      p = {
+        lat: p.lat,
+        lon: p.lon,
+        count: p.count,
+        label: normalizePlaceLabel(p.label || 'Somewhere')
+      };
       var lat = p.lat * Math.PI / 180;
       var lon = p.lon * Math.PI / 180;
       markers.push({
